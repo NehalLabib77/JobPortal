@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - JobPortal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Job<span>Portal</span></a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="dashboard-employer.html" class="nav-link">Dashboard</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <span style="color: var(--gray-600);">John Smith</span>
+                    <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Post Job Form -->
+    <section class="section" style="padding-top: 120px; background: var(--gray-100);">
+        <div class="container">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="card">
+                    <h2 style="margin-bottom: 30px; text-align: center;">Post a New Job</h2>
+
+                    <form id="postJobForm" action="../php/jobs/create-job.php" method="POST">
+                        <!-- Job Details -->
+                        <h4
+                            style="margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-200);">
+                            <i class="fas fa-briefcase"></i> Job Details
+                        </h4>
+
+                        <div class="form-group">
+                            <label class="form-label">Job Title *</label>
+                            <input type="text" name="title" class="form-control" placeholder="e.g. Senior PHP Developer"
+                                required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                            <div class="form-group">
+                                <label class="form-label">Category *</label>
+                                <select name="category_id" class="form-control" required>
+                                    <option value="">Select Category</option>
+                                    <option value="1">Technology</option>
+                                    <option value="2">Healthcare</option>
+                                    <option value="3">Finance</option>
+                                    <option value="4">Marketing</option>
+                                    <option value="5">Education</option>
+                                    <option value="6">Design</option>
+                                    <option value="7">Sales</option>
+                                    <option value="8">Engineering</option>
+                                    <option value="9">Customer Service</option>
+                                    <option value="10">Human Resources</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Job Type *</label>
+                                <select name="job_type" class="form-control" required>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="internship">Internship</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                            <div class="form-group">
+                                <label class="form-label">Experience Level</label>
+                                <select name="experience_level" class="form-control">
+                                    <option value="entry">Entry Level</option>
+                                    <option value="mid">Mid Level</option>
+                                    <option value="senior">Senior Level</option>
+                                    <option value="lead">Lead/Manager</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Vacancies</label>
+                                <input type="number" name="vacancies" class="form-control" value="1" min="1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Job Description *</label>
+                            <textarea name="description" class="form-control" rows="6"
+                                placeholder="Describe the job role, responsibilities, and what a typical day looks like..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Requirements</label>
+                            <textarea name="requirements" class="form-control" rows="5"
+                                placeholder="List the required skills, qualifications, and experience..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Benefits</label>
+                            <textarea name="benefits" class="form-control" rows="4"
+                                placeholder="Describe the benefits and perks of working at your company..."></textarea>
+                        </div>
+
+                        <!-- Location & Salary -->
+                        <h4
+                            style="margin: 30px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-200);">
+                            <i class="fas fa-map-marker-alt"></i> Location & Compensation
+                        </h4>
+
+                        <div class="form-group">
+                            <label class="form-label">Location *</label>
+                            <input type="text" name="location" class="form-control" placeholder="e.g. New York, USA"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" name="is_remote" value="1"> This is a remote position
+                            </label>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                            <div class="form-group">
+                                <label class="form-label">Minimum Salary</label>
+                                <input type="number" name="salary_min" class="form-control" placeholder="e.g. 50000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Maximum Salary</label>
+                                <input type="number" name="salary_max" class="form-control" placeholder="e.g. 80000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Salary Type</label>
+                                <select name="salary_type" class="form-control">
+                                    <option value="yearly">Per Year</option>
+                                    <option value="monthly">Per Month</option>
+                                    <option value="hourly">Per Hour</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Application Deadline</label>
+                            <input type="date" name="deadline" class="form-control">
+                        </div>
+
+                        <!-- Submit -->
+                        <div style="display: flex; gap: 15px; margin-top: 30px;">
+                            <button type="submit" class="btn btn-primary btn-lg" style="flex: 1;">
+                                <i class="fas fa-paper-plane"></i> Publish Job
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-lg" onclick="saveDraft()">
+                                <i class="fas fa-save"></i> Save as Draft
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 JobPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('postJobForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Job posted successfully! (Demo)');
+            window.location.href = 'dashboard-employer.html';
+        });
+
+        function saveDraft() {
+            alert('Job saved as draft (Demo)');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Dashboard - JobPortal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Job<span>Portal</span></a>
+
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="jobs.html" class="nav-link">Find Jobs</a></li>
+                    <li><a href="companies.html" class="nav-link">Companies</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="color: var(--gray-600);">Welcome, Jane</span>
+                        <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div
+                        style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200); margin-bottom: 20px;">
+                        <div
+                            style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4 style="margin-bottom: 5px;">Jane Doe</h4>
+                        <p style="color: var(--gray-500); font-size: 14px; margin: 0;">Job Seeker</p>
+                    </div>
+
+                    <nav class="sidebar-nav">
+                        <a href="#" class="active" onclick="showTab('overview')">
+                            <i class="fas fa-th-large"></i> Dashboard
+                        </a>
+                        <a href="#" onclick="showTab('profile')">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="#" onclick="showTab('applications')">
+                            <i class="fas fa-file-alt"></i> My Applications
+                        </a>
+                        <a href="#" onclick="showTab('saved')">
+                            <i class="fas fa-heart"></i> Saved Jobs
+                        </a>
+                        <a href="#" onclick="showTab('messages')">
+                            <i class="fas fa-envelope"></i> Messages
+                            <span class="badge badge-danger" style="margin-left: auto;">3</span>
+                        </a>
+                        <a href="#" onclick="showTab('settings')">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="login.html" style="color: var(--danger-color);">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-content">
+                    <!-- Overview Tab -->
+                    <div id="overview-tab">
+                        <div class="dashboard-header">
+                            <h2>Dashboard Overview</h2>
+                            <a href="jobs.html" class="btn btn-primary btn-sm">
+                                <i class="fas fa-search"></i> Find Jobs
+                            </a>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-file-alt"></i>
+                                <h3>12</h3>
+                                <p>Applications</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-eye"></i>
+                                <h3>48</h3>
+                                <p>Profile Views</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-heart"></i>
+                                <h3>8</h3>
+                                <p>Saved Jobs</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-envelope"></i>
+                                <h3>3</h3>
+                                <p>Messages</p>
+                            </div>
+                        </div>
+
+                        <!-- Recent Applications -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Recent Applications</h4>
+                                <a href="#" onclick="showTab('applications')">View All</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Job</th>
+                                            <th>Company</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="job-single.html">Senior PHP Developer</a></td>
+                                            <td>Tech Solutions Inc</td>
+                                            <td>Dec 27, 2025</td>
+                                            <td><span class="badge badge-warning">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#">Frontend Developer</a></td>
+                                            <td>Digital Agency Co</td>
+                                            <td>Dec 25, 2025</td>
+                                            <td><span class="badge badge-info">Reviewed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#">UI/UX Designer</a></td>
+                                            <td>Creative Studio</td>
+                                            <td>Dec 20, 2025</td>
+                                            <td><span class="badge badge-success">Shortlisted</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Profile Completion -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Profile Completion</h4>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>Profile Strength</span>
+                                    <span style="color: var(--primary-color); font-weight: 600;">75%</span>
+                                </div>
+                                <div
+                                    style="background: var(--gray-200); height: 10px; border-radius: 5px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 75%;"></div>
+                                </div>
+                            </div>
+                            <ul style="font-size: 14px; color: var(--gray-600);">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success"></i> Basic
+                                    info completed</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success"></i> Resume
+                                    uploaded</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-times-circle text-danger"></i> Add
+                                    work experience</li>
+                                <li><i class="fas fa-times-circle text-danger"></i> Add education details</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Profile Tab -->
+                    <div id="profile-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>My Profile</h2>
+                        </div>
+
+                        <form id="profileForm">
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" value="Jane Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="jane@example.com" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" placeholder="Enter phone number">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Location</label>
+                                    <input type="text" class="form-control" value="Los Angeles, USA">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Bio</label>
+                                <textarea class="form-control" rows="4"
+                                    placeholder="Tell us about yourself..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Skills</label>
+                                <input type="text" class="form-control" value="PHP, JavaScript, MySQL, HTML, CSS"
+                                    placeholder="Separate skills with commas">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Resume</label>
+                                <input type="file" class="form-control" accept=".pdf,.doc,.docx">
+                                <small style="color: var(--gray-500);">Current: resume_jane_doe.pdf</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Applications Tab -->
+                    <div id="applications-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>My Applications</h2>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Job</th>
+                                        <th>Company</th>
+                                        <th>Applied Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="job-single.html">Senior PHP Developer</a></td>
+                                        <td>Tech Solutions Inc</td>
+                                        <td>Dec 27, 2025</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                        <td><a href="job-single.html" class="btn btn-sm btn-secondary">View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">Frontend Developer</a></td>
+                                        <td>Digital Agency Co</td>
+                                        <td>Dec 25, 2025</td>
+                                        <td><span class="badge badge-info">Reviewed</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-secondary">View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">UI/UX Designer</a></td>
+                                        <td>Creative Studio</td>
+                                        <td>Dec 20, 2025</td>
+                                        <td><span class="badge badge-success">Shortlisted</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-secondary">View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">Data Analyst</a></td>
+                                        <td>Data Insights Ltd</td>
+                                        <td>Dec 15, 2025</td>
+                                        <td><span class="badge badge-danger">Rejected</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-secondary">View</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Saved Jobs Tab -->
+                    <div id="saved-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Saved Jobs</h2>
+                        </div>
+
+                        <div class="job-list">
+                            <div class="job-card">
+                                <div class="job-header">
+                                    <div class="company-logo"><i class="fas fa-building"></i></div>
+                                    <div class="job-info" style="flex: 1;">
+                                        <h4><a href="job-single.html">Senior PHP Developer</a></h4>
+                                        <span class="company-name">Tech Solutions Inc</span>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm text-danger">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="job-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> New York, USA</span>
+                                    <span><i class="fas fa-dollar-sign"></i> $80k - $120k</span>
+                                </div>
+                                <div class="job-footer">
+                                    <span class="job-date">Saved 2 days ago</span>
+                                    <a href="job-single.html" class="btn btn-primary btn-sm">Apply Now</a>
+                                </div>
+                            </div>
+
+                            <div class="job-card">
+                                <div class="job-header">
+                                    <div class="company-logo"><i class="fas fa-code"></i></div>
+                                    <div class="job-info" style="flex: 1;">
+                                        <h4><a href="#">Frontend Developer</a></h4>
+                                        <span class="company-name">Digital Agency Co</span>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm text-danger">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="job-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                                    <span><i class="fas fa-dollar-sign"></i> $60k - $90k</span>
+                                </div>
+                                <div class="job-footer">
+                                    <span class="job-date">Saved 5 days ago</span>
+                                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messages Tab -->
+                    <div id="messages-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Messages</h2>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <div class="card" style="margin-bottom: 0; border-left: 4px solid var(--primary-color);">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                    <div>
+                                        <h5 style="margin-bottom: 5px;">Tech Solutions Inc</h5>
+                                        <p style="color: var(--gray-500); font-size: 14px; margin-bottom: 10px;">
+                                            Thank you for applying. We would like to schedule an interview...
+                                        </p>
+                                        <span style="font-size: 12px; color: var(--gray-400);">Dec 28, 2025</span>
+                                    </div>
+                                    <span class="badge badge-info">New</span>
+                                </div>
+                            </div>
+
+                            <div class="card" style="margin-bottom: 0;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                    <div>
+                                        <h5 style="margin-bottom: 5px;">Creative Studio</h5>
+                                        <p style="color: var(--gray-500); font-size: 14px; margin-bottom: 10px;">
+                                            Congratulations! You've been shortlisted for the UI/UX Designer position...
+                                        </p>
+                                        <span style="font-size: 12px; color: var(--gray-400);">Dec 22, 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="settings-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Settings</h2>
+                        </div>
+
+                        <div class="card">
+                            <h4>Change Password</h4>
+                            <form style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Password</button>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <h4>Email Notifications</h4>
+                            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                    <input type="checkbox" checked> Job recommendations
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                    <input type="checkbox" checked> Application updates
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                    <input type="checkbox" checked> Messages from employers
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                    <input type="checkbox"> Newsletter
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: 20px;">Save Preferences</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

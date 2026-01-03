@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - JobPortal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Job<span>Portal</span></a>
+
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="jobs.html" class="nav-link">Browse Jobs</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="post-job.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Post Job
+                    </a>
+                    <span style="color: var(--gray-600); margin-left: 15px;">John Smith</span>
+                    <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div
+                        style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200); margin-bottom: 20px;">
+                        <div
+                            style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px;">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4 style="margin-bottom: 5px;">Tech Solutions Inc</h4>
+                        <p style="color: var(--gray-500); font-size: 14px; margin: 0;">Employer</p>
+                    </div>
+
+                    <nav class="sidebar-nav">
+                        <a href="#" class="active" onclick="showTab('overview')">
+                            <i class="fas fa-th-large"></i> Dashboard
+                        </a>
+                        <a href="#" onclick="showTab('company')">
+                            <i class="fas fa-building"></i> Company Profile
+                        </a>
+                        <a href="#" onclick="showTab('jobs')">
+                            <i class="fas fa-briefcase"></i> Manage Jobs
+                        </a>
+                        <a href="#" onclick="showTab('applications')">
+                            <i class="fas fa-users"></i> Applications
+                            <span class="badge badge-danger" style="margin-left: auto;">12</span>
+                        </a>
+                        <a href="post-job.html">
+                            <i class="fas fa-plus-circle"></i> Post New Job
+                        </a>
+                        <a href="#" onclick="showTab('messages')">
+                            <i class="fas fa-envelope"></i> Messages
+                        </a>
+                        <a href="#" onclick="showTab('settings')">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="login.html" style="color: var(--danger-color);">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-content">
+                    <!-- Overview Tab -->
+                    <div id="overview-tab">
+                        <div class="dashboard-header">
+                            <h2>Dashboard Overview</h2>
+                            <a href="post-job.html" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Post New Job
+                            </a>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-briefcase"></i>
+                                <h3>8</h3>
+                                <p>Active Jobs</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h3>124</h3>
+                                <p>Total Applications</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>15</h3>
+                                <p>Shortlisted</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-eye"></i>
+                                <h3>2.4k</h3>
+                                <p>Job Views</p>
+                            </div>
+                        </div>
+
+                        <!-- Recent Applications -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Recent Applications</h4>
+                                <a href="#" onclick="showTab('applications')">View All</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Candidate</th>
+                                            <th>Job</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div style="display: flex; align-items: center; gap: 10px;">
+                                                    <div
+                                                        style="width: 35px; height: 35px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center;">
+                                                        <i class="fas fa-user"></i>
+                                                    </div>
+                                                    Jane Doe
+                                                </div>
+                                            </td>
+                                            <td>Senior PHP Developer</td>
+                                            <td>Dec 27, 2025</td>
+                                            <td><span class="badge badge-warning">New</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="display: flex; align-items: center; gap: 10px;">
+                                                    <div
+                                                        style="width: 35px; height: 35px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center;">
+                                                        <i class="fas fa-user"></i>
+                                                    </div>
+                                                    Mike Johnson
+                                                </div>
+                                            </td>
+                                            <td>Frontend Developer</td>
+                                            <td>Dec 26, 2025</td>
+                                            <td><span class="badge badge-info">Reviewed</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="display: flex; align-items: center; gap: 10px;">
+                                                    <div
+                                                        style="width: 35px; height: 35px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center;">
+                                                        <i class="fas fa-user"></i>
+                                                    </div>
+                                                    Sarah Wilson
+                                                </div>
+                                            </td>
+                                            <td>UI/UX Designer</td>
+                                            <td>Dec 25, 2025</td>
+                                            <td><span class="badge badge-success">Shortlisted</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-secondary">View</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Active Jobs -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Your Active Jobs</h4>
+                                <a href="#" onclick="showTab('jobs')">Manage All</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Job Title</th>
+                                            <th>Applications</th>
+                                            <th>Views</th>
+                                            <th>Expires</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Senior PHP Developer</td>
+                                            <td>45</td>
+                                            <td>892</td>
+                                            <td>Jan 27, 2026</td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Frontend Developer</td>
+                                            <td>38</td>
+                                            <td>654</td>
+                                            <td>Jan 25, 2026</td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>UI/UX Designer</td>
+                                            <td>28</td>
+                                            <td>521</td>
+                                            <td>Jan 20, 2026</td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Profile Tab -->
+                    <div id="company-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Company Profile</h2>
+                        </div>
+
+                        <form id="companyForm">
+                            <div class="form-group">
+                                <label class="form-label">Company Logo</label>
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div
+                                        style="width: 100px; height: 100px; border-radius: var(--border-radius); background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <input type="file" class="form-control" style="max-width: 300px;">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Company Name *</label>
+                                    <input type="text" class="form-control" value="Tech Solutions Inc">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Industry</label>
+                                    <select class="form-control">
+                                        <option value="technology" selected>Technology</option>
+                                        <option value="healthcare">Healthcare</option>
+                                        <option value="finance">Finance</option>
+                                        <option value="education">Education</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Company Size</label>
+                                    <select class="form-control">
+                                        <option value="1-10">1-10 employees</option>
+                                        <option value="11-50">11-50 employees</option>
+                                        <option value="50-200" selected>50-200 employees</option>
+                                        <option value="200-500">200-500 employees</option>
+                                        <option value="500+">500+ employees</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Founded Year</label>
+                                    <input type="number" class="form-control" value="2015">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <input type="url" class="form-control" value="https://techsolutions.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Location</label>
+                                    <input type="text" class="form-control" value="New York, USA">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="hr@techsolutions.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" value="+1 234 567 890">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">About Company</label>
+                                <textarea class="form-control"
+                                    rows="5">Tech Solutions Inc is a leading technology company providing innovative solutions for businesses worldwide. We specialize in web development, mobile applications, and cloud services.</textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Manage Jobs Tab -->
+                    <div id="jobs-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Manage Jobs</h2>
+                            <a href="post-job.html" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Post New Job
+                            </a>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Job Title</th>
+                                        <th>Type</th>
+                                        <th>Applications</th>
+                                        <th>Expires</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Senior PHP Developer</strong></td>
+                                        <td>Full-time</td>
+                                        <td>45</td>
+                                        <td>Jan 27, 2026</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>
+                                            <a href="job-single.html" class="btn btn-sm btn-secondary"><i
+                                                    class="fas fa-eye"></i></a>
+                                            <button class="btn btn-sm btn-secondary"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frontend Developer</strong></td>
+                                        <td>Full-time</td>
+                                        <td>38</td>
+                                        <td>Jan 25, 2026</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i></a>
+                                            <button class="btn btn-sm btn-secondary"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>UI/UX Designer</strong></td>
+                                        <td>Full-time</td>
+                                        <td>28</td>
+                                        <td>Jan 20, 2026</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i></a>
+                                            <button class="btn btn-sm btn-secondary"><i
+                                                    class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Digital Marketing Manager</strong></td>
+                                        <td>Full-time</td>
+                                        <td>13</td>
+                                        <td>Dec 15, 2025</td>
+                                        <td><span class="badge badge-secondary">Closed</span></td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i></a>
+                                            <button class="btn btn-sm btn-secondary"><i
+                                                    class="fas fa-redo"></i></button>
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Applications Tab -->
+                    <div id="applications-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Applications</h2>
+                            <select class="form-control" style="width: auto;">
+                                <option value="">All Jobs</option>
+                                <option value="1">Senior PHP Developer</option>
+                                <option value="2">Frontend Developer</option>
+                                <option value="3">UI/UX Designer</option>
+                            </select>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Candidate</th>
+                                        <th>Job</th>
+                                        <th>Applied</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div
+                                                    style="width: 40px; height: 40px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div>
+                                                    <strong>Jane Doe</strong>
+                                                    <div style="font-size: 12px; color: var(--gray-500);">PHP,
+                                                        JavaScript, MySQL</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Senior PHP Developer</td>
+                                        <td>Dec 27, 2025</td>
+                                        <td><span class="badge badge-warning">New</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary"
+                                                onclick="viewApplication()">View</button>
+                                            <button class="btn btn-sm btn-success">Shortlist</button>
+                                            <button class="btn btn-sm btn-danger">Reject</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div
+                                                    style="width: 40px; height: 40px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div>
+                                                    <strong>Mike Johnson</strong>
+                                                    <div style="font-size: 12px; color: var(--gray-500);">React, Vue.js,
+                                                        TypeScript</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Frontend Developer</td>
+                                        <td>Dec 26, 2025</td>
+                                        <td><span class="badge badge-info">Reviewed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary">View</button>
+                                            <button class="btn btn-sm btn-success">Shortlist</button>
+                                            <button class="btn btn-sm btn-danger">Reject</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div
+                                                    style="width: 40px; height: 40px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div>
+                                                    <strong>Sarah Wilson</strong>
+                                                    <div style="font-size: 12px; color: var(--gray-500);">Figma, Adobe
+                                                        XD, Sketch</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>UI/UX Designer</td>
+                                        <td>Dec 25, 2025</td>
+                                        <td><span class="badge badge-success">Shortlisted</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary">View</button>
+                                            <button class="btn btn-sm btn-primary">Message</button>
+                                            <button class="btn btn-sm btn-danger">Reject</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Messages Tab -->
+                    <div id="messages-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Messages</h2>
+                        </div>
+                        <div class="alert alert-info">No new messages</div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="settings-tab" class="hidden">
+                        <div class="dashboard-header">
+                            <h2>Settings</h2>
+                        </div>
+
+                        <div class="card">
+                            <h4>Account Settings</h4>
+                            <form style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="employer@test.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        function viewApplication() {
+            alert('View application details (Demo)');
+        }
+    </script>
+</body>
+
+</html>

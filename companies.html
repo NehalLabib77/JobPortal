@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies - JobPortal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Job<span>Portal</span></a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="jobs.php" class="nav-link">Find Jobs</a></li>
+                    <li><a href="companies.html" class="nav-link active">Companies</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="login.php" class="btn btn-outline btn-sm">Login</a>
+                    <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 0 60px; color: white;">
+        <div class="container text-center">
+            <h1 style="color: white;">Browse Companies</h1>
+            <p style="opacity: 0.9;">Discover great places to work</p>
+        </div>
+    </section>
+
+    <!-- Search & Filter -->
+    <section style="background: var(--gray-100); padding: 30px 0;">
+        <div class="container">
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <input type="text" class="form-control" placeholder="Search companies..." style="flex: 1; min-width: 250px;">
+                <select class="form-control" style="width: 200px;">
+                    <option value="">All Industries</option>
+                    <option value="technology">Technology</option>
+                    <option value="finance">Finance</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="retail">Retail</option>
+                    <option value="manufacturing">Manufacturing</option>
+                </select>
+                <select class="form-control" style="width: 200px;">
+                    <option value="">All Locations</option>
+                    <option value="new-york">New York</option>
+                    <option value="san-francisco">San Francisco</option>
+                    <option value="chicago">Chicago</option>
+                    <option value="los-angeles">Los Angeles</option>
+                </select>
+                <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Grid -->
+    <section class="section">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <p style="margin: 0; color: var(--gray-600);">Showing <strong>48</strong> companies</p>
+                <select class="form-control" style="width: 200px;">
+                    <option value="newest">Newest First</option>
+                    <option value="name">Name A-Z</option>
+                    <option value="jobs">Most Jobs</option>
+                </select>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
+                <!-- Company Card 1 -->
+                <div class="card company-card" style="text-align: center;">
+                    <img src="https://via.placeholder.com/100x100?text=TC" alt="TechCorp" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">TechCorp Inc.</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Leading technology company specializing in innovative software solutions for businesses worldwide.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-primary">Technology</span>
+                        <span class="badge badge-success">12 Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+
+                <!-- Company Card 2 -->
+                <div class="card company-card" style="text-align: center;">
+                    <img src="https://via.placeholder.com/100x100?text=GH" alt="Global Health" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Global Health Inc.</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Boston, MA</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Healthcare provider committed to improving patient outcomes through innovation and compassionate care.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-primary">Healthcare</span>
+                        <span class="badge badge-success">8 Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+
+                <!-- Company Card 3 -->
+                <div class="card company-card" style="text-align: center;">
+                    <img src="https://via.placeholder.com/100x100?text=FS" alt="Finance Solutions" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Finance Solutions</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> New York, NY</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Investment banking and financial services firm helping clients achieve their financial goals.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-primary">Finance</span>
+                        <span class="badge badge-success">15 Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+
+                <!-- Company Card 4 -->
+                <div class="card company-card" style="text-align: center;">
+                    <img src="https://via.placeholder.com/100x100?text=DS" alt="Design Studio" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Creative Design Studio</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Los Angeles, CA</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Award-winning design agency creating beautiful digital experiences for global brands.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-primary">Design</span>
+                        <span class="badge badge-success">6 Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+
+                <!-- Company Card 5 -->
+                <div class="card company-card" style="text-align: center;">
+                    <img src="https://via.placeholder.com/100x100?text=ML" alt="Marketing Labs" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Marketing Labs</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Chicago, IL</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Full-service digital marketing agency helping brands grow their online presence and reach.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-primary">Marketing</span>
+                        <span class="badge badge-success">10 Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+
+                <!-- Company Card 6 -->
+                <div class="card company-card" style="text-align: center;">
+                    <img src="https://via.placeholder.com/100x100?text=EI" alt="EduInnovate" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">EduInnovate</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Austin, TX</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">EdTech company revolutionizing learning through technology and personalized education solutions.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-primary">Education</span>
+                        <span class="badge badge-success">5 Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" style="margin-top: 40px;">
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <a href="#" class="page-link">4</a>
+                <a href="#" class="page-link">Next <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Job<span style="color: var(--primary-color);">Portal</span></h4>
+                    <p>Your trusted partner in finding the perfect job or the ideal candidate.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="jobs.php">Browse Jobs</a></li>
+                        <li><a href="companies.html">Companies</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="register.html?type=employer">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@jobportal.com">info@jobportal.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JobPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
+
+
+
+

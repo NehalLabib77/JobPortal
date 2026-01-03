@@ -1,0 +1,52 @@
+# JobPortal .gitignore
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads (uncomment if you want to ignore user uploads)
+# uploads/
+
+# Cache
+cache/
+tmp/
+
+# Composer
+vendor/
+
+# Node.js (if used)
+node_modules/
+npm-debug.log*
+
+# PHP
+.phpunit.result.cache
+
+# Temporary files
+temp/
+tmp/

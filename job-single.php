@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<?php
+require_once 'php/includes/config.php';
+
+// No login requirement here - anyone can view job details
+// Login check will be done when applying
+?>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details - JobPortal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Job<span>Portal</span></a>
+
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="jobs.php" class="nav-link active">Find Jobs</a></li>
+                    <li><a href="companies.html" class="nav-link">Companies</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <span style="color: var(--gray-600); margin-right: 15px;">Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                        <a href="php/handlers/logout-handler.php" class="btn btn-outline btn-sm">Logout</a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn btn-outline btn-sm">Login</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+                    <?php endif; ?>
+                </div>
+
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Job Single -->
+    <section class="job-single">
+        <div class="container">
+            <!-- Job Header -->
+            <div class="job-detail-header">
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+                    <div class="company-logo" style="width: 100px; height: 100px; font-size: 40px;">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <h1 style="margin-bottom: 10px;" id="jobTitle">Senior PHP Developer</h1>
+                        <p style="font-size: 18px; color: var(--gray-600); margin-bottom: 15px;">
+                            <a href="company-single.html?id=1" style="color: var(--primary-color);">Tech Solutions
+                                Inc</a>
+                        </p>
+                        <div class="job-meta" style="font-size: 15px;">
+                            <span><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-bangladeshi-taka-sign"></i> ৳80,000 - ৳120,000/year</span>
+                            <span><i class="fas fa-calendar"></i> Posted 2 days ago</span>
+                        </div>
+                        <div class="job-tags" style="margin-top: 15px;">
+                            <span class="tag tag-type">Full-time</span>
+                            <span class="tag tag-level">Senior</span>
+                            <span class="tag tag-remote">Remote Available</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-outline" id="saveJobBtn">
+                            <i class="far fa-heart"></i> Save Job
+                        </button>
+                        <button class="btn btn-primary" onclick="openApplyModal()">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Body -->
+            <div class="job-detail-body">
+                <!-- Main Content -->
+                <div class="job-content">
+                    <h3>Job Description</h3>
+                    <p>We are looking for an experienced PHP Developer to join our team. You will be responsible for
+                        developing and maintaining web applications using PHP and related technologies.</p>
+                    <p>As a Senior PHP Developer, you will work closely with our design and product teams to create
+                        elegant, efficient, and scalable solutions. You'll be involved in all stages of the development
+                        lifecycle, from planning and design to implementation and deployment.</p>
+
+                    <h3>Responsibilities</h3>
+                    <ul>
+                        <li>Develop, test, and maintain web applications using PHP frameworks (Laravel, Symfony)</li>
+                        <li>Write clean, well-documented, and efficient code</li>
+                        <li>Design and implement database schemas with MySQL/PostgreSQL</li>
+                        <li>Collaborate with front-end developers to integrate user-facing elements</li>
+                        <li>Participate in code reviews and mentor junior developers</li>
+                        <li>Troubleshoot, debug, and upgrade existing applications</li>
+                        <li>Stay up-to-date with emerging technologies and industry trends</li>
+                        <li>Contribute to technical documentation</li>
+                    </ul>
+
+                    <h3>Requirements</h3>
+                    <ul>
+                        <li>Minimum 5 years of professional PHP development experience</li>
+                        <li>Strong proficiency in PHP 7.x/8.x and modern frameworks (Laravel preferred)</li>
+                        <li>Solid understanding of MySQL/PostgreSQL database design and optimization</li>
+                        <li>Experience with RESTful API design and implementation</li>
+                        <li>Familiarity with front-end technologies (HTML, CSS, JavaScript)</li>
+                        <li>Knowledge of version control systems (Git)</li>
+                        <li>Experience with testing frameworks (PHPUnit)</li>
+                        <li>Excellent problem-solving and communication skills</li>
+                        <li>Bachelor's degree in Computer Science or related field (or equivalent experience)</li>
+                    </ul>
+
+                    <h3>Nice to Have</h3>
+                    <ul>
+                        <li>Experience with Vue.js or React</li>
+                        <li>Knowledge of Docker and containerization</li>
+                        <li>Experience with AWS or other cloud platforms</li>
+                        <li>Familiarity with CI/CD pipelines</li>
+                        <li>Experience with microservices architecture</li>
+                    </ul>
+
+                    <h3>Benefits</h3>
+                    <ul>
+                        <li>Competitive salary and performance bonuses</li>
+                        <li>Health, dental, and vision insurance</li>
+                        <li>401(k) with company matching</li>
+                        <li>Flexible work hours and remote work options</li>
+                        <li>Professional development budget</li>
+                        <li>Paid time off and holidays</li>
+                        <li>Modern office with free snacks and drinks</li>
+                        <li>Team building events and activities</li>
+                    </ul>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="job-sidebar">
+                    <div class="sidebar-card">
+                        <h4>Job Overview</h4>
+                        <div class="job-overview-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <span>Date Posted</span>
+                                <strong>December 27, 2025</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-hourglass-end"></i>
+                            <div>
+                                <span>Expiration Date</span>
+                                <strong>January 27, 2026</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span>Location</span>
+                                <strong>Dhaka, Bangladesh</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <span>Job Type</span>
+                                <strong>Full-time</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-bangladeshi-taka-sign"></i>
+                            <div>
+                                <span>Salary</span>
+                                <strong>৳80,000 - ৳120,000/year</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-layer-group"></i>
+                            <div>
+                                <span>Experience</span>
+                                <strong>5+ Years</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <span>Vacancies</span>
+                                <strong>2 Positions</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Company Info</h4>
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div class="company-logo"
+                                style="width: 80px; height: 80px; margin: 0 auto 15px; font-size: 32px;">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h5>Tech Solutions Inc</h5>
+                            <p style="color: var(--gray-500); font-size: 14px; margin: 0;">Technology Company</p>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <span>Website</span>
+                                <strong><a href="#">www.techsolutions.com</a></strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span>Location</span>
+                                <strong>Dhaka, Bangladesh</strong>
+                            </div>
+                        </div>
+                        <div class="job-overview-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <span>Company Size</span>
+                                <strong>50-200 employees</strong>
+                            </div>
+                        </div>
+                        <a href="company-single.html?id=1" class="btn btn-outline"
+                            style="width: 100%; margin-top: 15px;">
+                            View Company Profile
+                        </a>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Share This Job</h4>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="#" class="btn btn-secondary btn-sm" style="flex: 1;"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn btn-secondary btn-sm" style="flex: 1;"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#" class="btn btn-secondary btn-sm" style="flex: 1;"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="btn btn-secondary btn-sm" style="flex: 1;"><i
+                                    class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Jobs -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <h2 style="margin-bottom: 30px;">Related Jobs</h2>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo"><i class="fas fa-code"></i></div>
+                        <div class="job-info">
+                            <h4><a href="job-single.php?id=2">Frontend Developer</a></h4>
+                            <span class="company-name">Digital Agency Co</span>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag tag-type">Full-time</span>
+                        <span class="tag tag-remote">Remote</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="salary">৳60k - ৳90k/yr</span>
+                        <span class="job-date">3 days ago</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo"><i class="fas fa-server"></i></div>
+                        <div class="job-info">
+                            <h4><a href="#">Backend Developer</a></h4>
+                            <span class="company-name">StartUp Labs</span>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Chittagong, Bangladesh</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag tag-type">Full-time</span>
+                        <span class="tag tag-level">Mid-level</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="salary">৳70k - ৳100k/yr</span>
+                        <span class="job-date">1 week ago</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo"><i class="fas fa-cogs"></i></div>
+                        <div class="job-info">
+                            <h4><a href="#">Full Stack Developer</a></h4>
+                            <span class="company-name">Innovation Hub</span>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Sylhet, Bangladesh</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag tag-type">Full-time</span>
+                        <span class="tag tag-level">Senior</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="salary">৳100k - ৳140k/yr</span>
+                        <span class="job-date">4 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply Modal -->
+    <div class="modal-overlay" id="applyModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h4>Apply for Senior PHP Developer</h4>
+                <button class="modal-close" onclick="closeApplyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="applyForm">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($_SESSION['user_email'] ?? ''); ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Resume/CV *</label>
+                        <input type="file" class="form-control" name="resume" accept=".pdf,.doc,.docx" required>
+                        <small style="color: var(--gray-500);">Accepted formats: PDF, DOC, DOCX (Max 5MB)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Cover Letter</label>
+                        <textarea class="form-control" name="cover_letter" rows="5"
+                            placeholder="Tell us why you're a great fit for this position..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeApplyModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitApplication(event)">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Job<span style="color: var(--primary-color);">Portal</span></h4>
+                    <p>Your trusted partner in finding the perfect job or the ideal candidate.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="jobs.php">Browse Jobs</a></li>
+                        <li><a href="companies.html">Companies</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="dashboard-employer.php">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@jobportal.com">info@jobportal.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JobPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function openApplyModal() {
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                // Not logged in - redirect to login with return URL
+                const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;
+                const returnUrl = jobId ? 'job-single.php?id=' + jobId : 'job-single.php';
+                window.location.href = 'login.php?redirect=' + encodeURIComponent(returnUrl);
+                return;
+            <?php elseif ($_SESSION['user_type'] !== 'candidate'): ?>
+                // Logged in but not as candidate - redirect to login
+                const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;
+                const returnUrl2 = jobId ? 'job-single.php?id=' + jobId : 'job-single.php';
+                window.location.href = 'login.php?redirect=' + encodeURIComponent(returnUrl2);
+                return;
+            <?php endif; ?>
+
+            // User is logged in as candidate - show application modal
+            document.getElementById('applyModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeApplyModal() {
+            document.getElementById('applyModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        function submitApplication(event) {
+            event.preventDefault();
+
+            // Get the button properly (not the icon inside it)
+            const submitBtn = document.querySelector('#applyModal .modal-footer .btn-primary');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            // Get form data
+            const formData = new FormData(document.getElementById('applyForm'));
+            const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 0; ?>;
+
+            // Prepare data for API
+            const applicationData = {
+                job_id: jobId,
+                cover_letter: formData.get('cover_letter') || '',
+                resume_path: null // For now, we'll handle file uploads later
+            };
+
+            // Submit application
+            fetch('php/api/applications-api.php?action=create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(applicationData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        closeApplyModal();
+
+                        // Show success notification
+                        const notification = document.createElement('div');
+                        notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        padding: 20px 30px;
+                        background: #10b981;
+                        color: white;
+                        border-radius: 8px;
+                        font-weight: 500;
+                        z-index: 3000;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        animation: slideIn 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    `;
+                        notification.innerHTML = '<i class="fas fa-check-circle"></i> Application submitted successfully!';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                            notification.style.animation = 'slideOut 0.3s ease';
+                            setTimeout(() => notification.remove(), 300);
+                        }, 4000);
+
+                        // Reset button
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+
+                        // Reset form
+                        document.getElementById('applyForm').reset();
+                    } else {
+                        // Show error
+                        alert('Error: ' + data.message);
+
+                        // Reset button
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while submitting your application. Please try again.');
+
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                });
+        }
+
+        // Close modal when clicking on overlay
+        document.getElementById('applyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeApplyModal();
+            }
+        });
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+        }
+    </style>
+</body>
+
+</html>
