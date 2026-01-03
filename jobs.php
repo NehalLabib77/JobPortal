@@ -66,7 +66,7 @@ $jobs = getJobs($filters);
                         <?php endif; ?>
                     <?php else: ?>
                         <a href="login.php" class="btn btn-outline btn-sm">Login</a>
-                        <a href="register.php" class="btn btn-primary btn-sm">Register</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
                     <?php endif; ?>
                 </div>
 

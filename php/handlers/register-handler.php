@@ -55,7 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Attempt registration
-    $result = registerUser($name, $email, $password, $role);
+    $result = registerUser([
+        'name' => $name,
+        'email' => $email,
+        'password' => $password,
+        'user_type' => $role,
+        'company_name' => sanitize($_POST['company_name'] ?? '')
+    ]);
 
     if ($result['success']) {
         $_SESSION['success'] = 'Registration successful! Please login.';
