@@ -1,13 +1,7 @@
 <?php
 
-/**
- * SQLite Database Setup Script
- * Creates jobportal.db with all tables and sample data
- */
-
 $dbPath = __DIR__ . '/jobportal.db';
 
-// Delete existing database if exists
 if (file_exists($dbPath)) {
     unlink($dbPath);
 }
@@ -16,12 +10,10 @@ try {
     $pdo = new PDO('sqlite:' . $dbPath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Enable foreign keys
     $pdo->exec('PRAGMA foreign_keys = ON;');
 
     echo "Creating SQLite database...\n";
 
-    // Create Users Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,7 +38,6 @@ try {
     ");
     echo "✓ Users table created\n";
 
-    // Create Companies Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS companies (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -70,7 +61,6 @@ try {
     ");
     echo "✓ Companies table created\n";
 
-    // Create Categories Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS categories (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -84,7 +74,6 @@ try {
     ");
     echo "✓ Categories table created\n";
 
-    // Create Jobs Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS jobs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -116,7 +105,6 @@ try {
     ");
     echo "✓ Jobs table created\n";
 
-    // Create Applications Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS applications (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -135,7 +123,6 @@ try {
     ");
     echo "✓ Applications table created\n";
 
-    // Create Saved Jobs Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS saved_jobs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -149,7 +136,6 @@ try {
     ");
     echo "✓ Saved Jobs table created\n";
 
-    // Create Messages Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -165,7 +151,6 @@ try {
     ");
     echo "✓ Messages table created\n";
 
-    // Create Payments Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS payments (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -188,7 +173,6 @@ try {
     ");
     echo "✓ Payments table created\n";
 
-    // Create Interviews Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS interviews (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -198,7 +182,7 @@ try {
             job_id INTEGER NOT NULL,
             interview_date DATETIME NOT NULL,
             interview_type TEXT CHECK(interview_type IN ('phone', 'video', 'in_person')) DEFAULT 'video',
-            platform VARCHAR(100), -- zoom, meet, teams, etc.
+            platform VARCHAR(100),
             meeting_link VARCHAR(500),
             notes TEXT,
             status TEXT CHECK(status IN ('scheduled', 'completed', 'cancelled', 'rescheduled')) DEFAULT 'scheduled',
@@ -214,7 +198,6 @@ try {
     ");
     echo "✓ Interviews table created\n";
 
-    // Create Site Settings Table
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS site_settings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -226,7 +209,6 @@ try {
     ");
     echo "✓ Site settings table created\n";
 
-    // Insert default settings
     $pdo->exec("
         INSERT INTO site_settings (setting_key, setting_value) VALUES
         ('job_posting_fee', '200'),
@@ -237,7 +219,6 @@ try {
     ");
     echo "✓ Default settings inserted\n";
 
-    // Insert categories
     $pdo->exec("
         INSERT INTO categories (name, slug, icon, description) VALUES
         ('Technology', 'technology', 'fa-laptop-code', 'Software, IT, and Tech jobs'),
@@ -253,35 +234,30 @@ try {
     ");
     echo "✓ Categories inserted\n";
 
-    // Insert Admin User (password: password)
     $pdo->exec("
         INSERT INTO users (name, email, password, user_type) VALUES
         ('Admin', 'admin@jobportal.com', '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin')
     ");
     echo "✓ Admin user created (admin@jobportal.com / password)\n";
 
-    // Insert Sample Employer (password: password)
     $pdo->exec("
         INSERT INTO users (name, email, password, user_type, location) VALUES
         ('John Smith', 'employer@test.com', '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employer', 'Dhaka, Bangladesh')
     ");
     echo "✓ Employer user created (employer@test.com / password)\n";
 
-    // Insert Sample Company
     $pdo->exec("
         INSERT INTO companies (user_id, name, slug, description, industry, company_size, location, email) VALUES
         (2, 'Tech Solutions Inc', 'tech-solutions-inc', 'Leading technology company providing innovative solutions', 'Technology', '50-200', 'Dhaka, Bangladesh', 'hr@techsolutions.com')
     ");
     echo "✓ Sample company created\n";
 
-    // Insert Sample Candidate (password: password)
     $pdo->exec("
         INSERT INTO users (name, email, password, user_type, location, skills) VALUES
         ('Jane Doe', 'candidate@test.com', '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'candidate', 'Chittagong, Bangladesh', 'PHP, JavaScript, MySQL, HTML, CSS')
     ");
     echo "✓ Candidate user created (candidate@test.com / password)\n";
 
-    // Insert Sample Jobs
     $deadline = date('Y-m-d', strtotime('+30 days'));
     $pdo->exec("
         INSERT INTO jobs (company_id, user_id, category_id, title, slug, description, requirements, job_type, experience_level, salary_min, salary_max, location, is_remote, deadline, status) VALUES
@@ -292,7 +268,6 @@ try {
     ");
     echo "✓ Sample jobs inserted\n";
 
-    // Insert Sample Payments
     $pdo->exec("
         INSERT INTO payments (user_id, job_id, transaction_id, amount, currency, payment_method, payment_status, payer_phone, payer_name, created_at) VALUES
         (2, 1, 'TXN202512290001', 200.00, 'BDT', 'bkash', 'completed', '01712345678', 'John Smith', '2025-12-29 10:00:00'),
@@ -302,7 +277,6 @@ try {
     ");
     echo "✓ Sample payments inserted\n";
 
-    // Insert Sample Applications
     $pdo->exec("
         INSERT INTO applications (job_id, user_id, cover_letter, status, created_at) VALUES
         (1, 3, 'I am very interested in the Senior PHP Developer position. With 5+ years of experience in PHP development and expertise in Laravel, I believe I would be a great fit for your team.', 'shortlisted', '2025-12-27 09:00:00'),
@@ -311,7 +285,6 @@ try {
     ");
     echo "✓ Sample applications inserted\n";
 
-    // Insert Sample Interviews
     $futureDate1 = date('Y-m-d H:i:s', strtotime('+2 days'));
     $futureDate2 = date('Y-m-d H:i:s', strtotime('+5 days'));
     $pastDate = date('Y-m-d H:i:s', strtotime('-1 day'));
@@ -336,4 +309,3 @@ try {
     echo "Error: " . $e->getMessage() . "\n";
     exit(1);
 }
-

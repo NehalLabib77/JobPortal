@@ -1,10 +1,5 @@
 <?php
 
-/**
- * JobPortal - Payment API
- * Handles payment-related API requests
- */
-
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../payments/payment-handler.php';
 
@@ -14,7 +9,6 @@ $action = $_GET['action'] ?? $_POST['action'] ?? '';
 
 switch ($action) {
     case 'create':
-        // Create new payment
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo json_encode(['success' => false, 'message' => 'Invalid request method']);
             exit;
@@ -34,7 +28,6 @@ switch ($action) {
         break;
 
     case 'get':
-        // Get payment by transaction ID
         $transactionId = $_GET['transaction_id'] ?? '';
         if (empty($transactionId)) {
             echo json_encode(['success' => false, 'message' => 'Transaction ID required']);
@@ -50,7 +43,6 @@ switch ($action) {
         break;
 
     case 'user_payments':
-        // Get payments for logged-in user
         if (!isLoggedIn()) {
             echo json_encode(['success' => false, 'message' => 'Unauthorized']);
             exit;
@@ -61,7 +53,6 @@ switch ($action) {
         break;
 
     case 'all':
-        // Get all payments (admin only)
         if (!isAdmin()) {
             echo json_encode(['success' => false, 'message' => 'Unauthorized']);
             exit;
@@ -79,7 +70,6 @@ switch ($action) {
         break;
 
     case 'update_status':
-        // Update payment status (admin only)
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo json_encode(['success' => false, 'message' => 'Invalid request method']);
             exit;
@@ -93,7 +83,6 @@ switch ($action) {
         break;
 
     case 'stats':
-        // Get payment statistics (admin only)
         if (!isAdmin()) {
             echo json_encode(['success' => false, 'message' => 'Unauthorized']);
             exit;
@@ -105,7 +94,6 @@ switch ($action) {
         break;
 
     case 'report':
-        // Generate payment report (admin only)
         if (!isAdmin()) {
             echo json_encode(['success' => false, 'message' => 'Unauthorized']);
             exit;
@@ -126,7 +114,6 @@ switch ($action) {
         break;
 
     case 'get_fee':
-        // Get current job posting fee
         echo json_encode([
             'success' => true,
             'fee' => JOB_POSTING_FEE,

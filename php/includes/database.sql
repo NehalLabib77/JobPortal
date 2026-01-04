@@ -1,10 +1,8 @@
--- JobPortal Database Schema
--- Run this SQL in phpMyAdmin or MySQL CLI
 
 CREATE DATABASE IF NOT EXISTS jobportal;
 USE jobportal;
 
--- Users Table
+
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -26,7 +24,7 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Companies Table
+
 CREATE TABLE IF NOT EXISTS companies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -47,7 +45,7 @@ CREATE TABLE IF NOT EXISTS companies (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Categories Table
+
 CREATE TABLE IF NOT EXISTS categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -58,7 +56,7 @@ CREATE TABLE IF NOT EXISTS categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Jobs Table
+
 CREATE TABLE IF NOT EXISTS jobs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     company_id INT NOT NULL,
@@ -87,7 +85,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 
--- Applications Table
+
 CREATE TABLE IF NOT EXISTS applications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     job_id INT NOT NULL,
@@ -103,7 +101,7 @@ CREATE TABLE IF NOT EXISTS applications (
     UNIQUE KEY unique_application (job_id, user_id)
 );
 
--- Saved Jobs Table
+
 CREATE TABLE IF NOT EXISTS saved_jobs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -114,7 +112,7 @@ CREATE TABLE IF NOT EXISTS saved_jobs (
     UNIQUE KEY unique_saved (user_id, job_id)
 );
 
--- Messages Table
+
 CREATE TABLE IF NOT EXISTS messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT NOT NULL,
@@ -127,7 +125,7 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Payments Table (Job Posting Fee: 200 TK)
+
 CREATE TABLE IF NOT EXISTS payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -147,7 +145,7 @@ CREATE TABLE IF NOT EXISTS payments (
     FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE SET NULL
 );
 
--- Site Settings Table (for admin)
+
 CREATE TABLE IF NOT EXISTS site_settings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     setting_key VARCHAR(100) UNIQUE NOT NULL,
@@ -155,7 +153,7 @@ CREATE TABLE IF NOT EXISTS site_settings (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Insert default job posting fee
+
 INSERT INTO site_settings (setting_key, setting_value) VALUES
 ('job_posting_fee', '200'),
 ('currency', 'BDT'),
@@ -176,23 +174,19 @@ INSERT INTO categories (name, slug, icon, description) VALUES
 ('Customer Service', 'customer-service', 'fa-headset', 'Support and Customer Service'),
 ('Human Resources', 'human-resources', 'fa-users', 'HR and Recruitment');
 
--- Insert Admin User (password: password)
+
 INSERT INTO users (name, email, password, user_type) VALUES
 ('Admin', 'admin@jobportal.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 
--- Insert Sample Employer (password: password)
 INSERT INTO users (name, email, password, user_type, location) VALUES
 ('John Smith', 'employer@test.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'employer', 'New York, USA');
 
--- Insert Sample Company
 INSERT INTO companies (user_id, name, slug, description, industry, company_size, location, email) VALUES
 (2, 'Tech Solutions Inc', 'tech-solutions-inc', 'Leading technology company providing innovative solutions', 'Technology', '50-200', 'New York, USA', 'hr@techsolutions.com');
 
--- Insert Sample Candidate (password: password123)
 INSERT INTO users (name, email, password, user_type, location, skills) VALUES
 ('Jane Doe', 'candidate@test.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'candidate', 'Los Angeles, USA', 'PHP, JavaScript, MySQL, HTML, CSS');
 
--- Insert Sample Jobs
 INSERT INTO jobs (company_id, user_id, category_id, title, slug, description, requirements, job_type, experience_level, salary_min, salary_max, location, is_remote, deadline) VALUES
 (1, 2, 1, 'Senior PHP Developer', 'senior-php-developer', 'We are looking for an experienced PHP Developer to join our team. You will be responsible for developing and maintaining web applications.', 'Minimum 5 years of PHP experience\nStrong knowledge of MySQL\nExperience with Laravel or similar frameworks\nGood communication skills', 'full-time', 'senior', 80000, 120000, 'New York, USA', 1, DATE_ADD(CURDATE(), INTERVAL 30 DAY)),
 (1, 2, 1, 'Frontend Developer', 'frontend-developer', 'Join our dynamic team as a Frontend Developer. Work with modern technologies to create stunning user interfaces.', 'Experience with React or Vue.js\nStrong HTML, CSS, JavaScript skills\nResponsive design knowledge\nGit version control', 'full-time', 'mid', 60000, 90000, 'Remote', 1, DATE_ADD(CURDATE(), INTERVAL 30 DAY)),

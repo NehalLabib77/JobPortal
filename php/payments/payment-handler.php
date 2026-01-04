@@ -1,19 +1,10 @@
 <?php
 
-/**
- * JobPortal - Payment Handler Functions
- * Handles payment processing for job postings (200 TK fee)
- */
-
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/functions.php';
 
-// Job posting fee in BDT
 define('JOB_POSTING_FEE', 200);
 
-/**
- * Create a new payment record
- */
 function createPayment($data)
 {
     if (!isLoggedIn() || !isEmployer()) {
@@ -22,7 +13,6 @@ function createPayment($data)
 
     $pdo = getDBConnection();
 
-    // Validate required fields
     $required = ['payment_method', 'payer_phone', 'payment_reference', 'payer_name'];
     foreach ($required as $field) {
         if (empty($data[$field])) {
@@ -30,13 +20,11 @@ function createPayment($data)
         }
     }
 
-    // Validate payment method
     $validMethods = ['bkash', 'nagad', 'rocket', 'card', 'bank'];
     if (!in_array($data['payment_method'], $validMethods)) {
         return ['success' => false, 'message' => 'Invalid payment method.'];
     }
 
-    // Generate unique transaction ID
     $transactionId = 'TXN' . date('YmdHis') . rand(1000, 9999);
 
     $sql = "INSERT INTO payments (user_id, job_id, transaction_id, amount, currency, payment_method, 
@@ -68,9 +56,6 @@ function createPayment($data)
     }
 }
 
-/**
- * Get payment by transaction ID
- */
 function getPaymentByTransaction($transactionId)
 {
     $pdo = getDBConnection();
@@ -87,9 +72,6 @@ function getPaymentByTransaction($transactionId)
     return $stmt->fetch();
 }
 
-/**
- * Get payments for a specific user (employer)
- */
 function getUserPayments($userId, $limit = 50)
 {
     $pdo = getDBConnection();
@@ -106,9 +88,6 @@ function getUserPayments($userId, $limit = 50)
     return $stmt->fetchAll();
 }
 
-/**
- * Get all payments (admin)
- */
 function getAllPayments($filters = [], $limit = 100)
 {
     if (!isAdmin()) {
@@ -158,9 +137,6 @@ function getAllPayments($filters = [], $limit = 100)
     return $stmt->fetchAll();
 }
 
-/**
- * Update payment status (admin)
- */
 function updatePaymentStatus($paymentId, $status)
 {
     if (!isAdmin()) {
@@ -178,7 +154,6 @@ function updatePaymentStatus($paymentId, $status)
         $stmt = $pdo->prepare("UPDATE payments SET payment_status = ? WHERE id = ?");
         $stmt->execute([$status, $paymentId]);
 
-        // If completed, activate the associated job
         if ($status === 'completed') {
             $stmt = $pdo->prepare("SELECT job_id FROM payments WHERE id = ?");
             $stmt->execute([$paymentId]);
@@ -196,9 +171,6 @@ function updatePaymentStatus($paymentId, $status)
     }
 }
 
-/**
- * Get payment statistics (admin)
- */
 function getPaymentStats($period = 'all')
 {
     if (!isAdmin()) {
@@ -225,23 +197,18 @@ function getPaymentStats($period = 'all')
 
     $stats = [];
 
-    // Total earnings (completed payments)
     $stmt = $pdo->query("SELECT COALESCE(SUM(amount), 0) as total FROM payments WHERE payment_status = 'completed' $dateFilter");
     $stats['total_earnings'] = $stmt->fetch()['total'];
 
-    // Total payments count
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM payments WHERE 1=1 $dateFilter");
     $stats['total_payments'] = $stmt->fetch()['count'];
 
-    // Completed payments
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM payments WHERE payment_status = 'completed' $dateFilter");
     $stats['completed_payments'] = $stmt->fetch()['count'];
 
-    // Pending payments
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM payments WHERE payment_status = 'pending' $dateFilter");
     $stats['pending_payments'] = $stmt->fetch()['count'];
 
-    // By payment method
     $stmt = $pdo->query("
         SELECT payment_method, COUNT(*) as count, SUM(CASE WHEN payment_status = 'completed' THEN amount ELSE 0 END) as total
         FROM payments 
@@ -253,9 +220,6 @@ function getPaymentStats($period = 'all')
     return $stats;
 }
 
-/**
- * Generate payment report (admin)
- */
 function generatePaymentReport($startDate, $endDate, $format = 'array')
 {
     if (!isAdmin()) {
@@ -298,9 +262,6 @@ function generatePaymentReport($startDate, $endDate, $format = 'array')
     return $data;
 }
 
-/**
- * Generate CSV from data
- */
 function generateCSV($data)
 {
     if (empty($data)) {
@@ -309,10 +270,8 @@ function generateCSV($data)
 
     $output = fopen('php://temp', 'r+');
 
-    // Headers
     fputcsv($output, array_keys($data[0]));
 
-    // Data rows
     foreach ($data as $row) {
         fputcsv($output, $row);
     }
@@ -324,9 +283,6 @@ function generateCSV($data)
     return $csv;
 }
 
-/**
- * Get payment method display info
- */
 function getPaymentMethodInfo($method)
 {
     $methods = [

@@ -1,17 +1,11 @@
 <?php
 
-/**
- * Interview API
- * Handles interview management for candidates and employers
- */
-
 require_once '../includes/config.php';
 require_once '../includes/interview_functions.php';
 require_once '../auth/auth.php';
 
 header('Content-Type: application/json');
 
-// Check if user is logged in
 if (!isLoggedIn()) {
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Authentication required']);
@@ -83,7 +77,6 @@ switch ($method) {
                     break;
                 }
 
-                // Verify ownership
                 $interview = getInterview($interviewId, $userId, $userType);
                 if (!$interview) {
                     http_response_code(404);

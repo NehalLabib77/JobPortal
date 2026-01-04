@@ -1,6 +1,3 @@
-/* JobPortal - Main Stylesheet */
-
-/* ========== CSS Variables ========== */
 :root {
     --primary-color: #2563eb;
     --primary-dark: #1d4ed8;
@@ -27,7 +24,6 @@
     --transition: all 0.3s ease;
 }
 
-/* ========== Reset & Base ========== */
 *,
 *::before,
 *::after {
@@ -68,7 +64,6 @@ ol {
     list-style: none;
 }
 
-/* ========== Typography ========== */
 h1,
 h2,
 h3,
@@ -109,7 +104,6 @@ p {
     margin-bottom: 1rem;
 }
 
-/* ========== Layout ========== */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -137,7 +131,6 @@ p {
     margin: 0 auto;
 }
 
-/* ========== Buttons ========== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -203,7 +196,6 @@ p {
     font-size: 18px;
 }
 
-/* ========== Forms ========== */
 .form-group {
     margin-bottom: 20px;
 }
@@ -244,7 +236,6 @@ select.form-control {
     cursor: pointer;
 }
 
-/* ========== Header & Navigation ========== */
 .header {
     background: white;
     box-shadow: var(--shadow);
@@ -321,7 +312,6 @@ select.form-control {
     color: var(--gray-700);
 }
 
-/* ========== Hero Section ========== */
 .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     padding: 160px 0 100px;
@@ -346,7 +336,6 @@ select.form-control {
     margin-bottom: 40px;
 }
 
-/* ========== Search Box ========== */
 .search-box {
     background: white;
     border-radius: 12px;
@@ -370,7 +359,6 @@ select.form-control {
     min-width: 150px;
 }
 
-/* ========== Stats Section ========== */
 .stats {
     background: white;
     padding: 60px 0;
@@ -395,7 +383,6 @@ select.form-control {
     margin: 0;
 }
 
-/* ========== Categories Section ========== */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -439,7 +426,6 @@ select.form-control {
     font-size: 14px;
 }
 
-/* ========== Job Cards ========== */
 .jobs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -559,7 +545,6 @@ select.form-control {
     color: var(--gray-400);
 }
 
-/* ========== Job List View ========== */
 .job-list {
     display: flex;
     flex-direction: column;
@@ -572,7 +557,6 @@ select.form-control {
     gap: 20px;
 }
 
-/* ========== Job Single Page ========== */
 .job-single {
     padding-top: 100px;
 }
@@ -679,7 +663,6 @@ select.form-control {
     color: var(--dark-color);
 }
 
-/* ========== Dashboard ========== */
 .dashboard {
     padding-top: 100px;
     min-height: 100vh;
@@ -739,7 +722,6 @@ select.form-control {
     border-bottom: 1px solid var(--gray-200);
 }
 
-/* ========== Cards & Widgets ========== */
 .card {
     background: white;
     border-radius: var(--border-radius);
@@ -788,7 +770,6 @@ select.form-control {
     margin: 0;
 }
 
-/* ========== Tables ========== */
 .table-responsive {
     overflow-x: auto;
 }
@@ -815,7 +796,6 @@ select.form-control {
     background: var(--gray-50);
 }
 
-/* ========== Badges ========== */
 .badge {
     display: inline-block;
     padding: 5px 12px;
@@ -849,7 +829,6 @@ select.form-control {
     color: var(--gray-600);
 }
 
-/* ========== Alerts ========== */
 .alert {
     padding: 15px 20px;
     border-radius: var(--border-radius);
@@ -880,7 +859,6 @@ select.form-control {
     border: 1px solid #93c5fd;
 }
 
-/* ========== Modal ========== */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -946,7 +924,6 @@ select.form-control {
     border-top: 1px solid var(--gray-200);
 }
 
-/* ========== Footer ========== */
 .footer {
     background: var(--dark-color);
     color: var(--gray-400);
@@ -1009,7 +986,6 @@ select.form-control {
     border-top: 1px solid var(--gray-700);
 }
 
-/* ========== Utilities ========== */
 .text-center {
     text-align: center;
 }
@@ -1098,16 +1074,12 @@ select.form-control {
     display: none !important;
 }
 
-/* ========== Responsive ========== */
-
-/* Large devices (desktops, less than 1200px) */
 @media (max-width: 1199px) {
     .container {
         max-width: 960px;
     }
 }
 
-/* Medium devices (tablets, less than 992px) */
 @media (max-width: 992px) {
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1140,7 +1112,6 @@ select.form-control {
     }
 }
 
-/* Small devices (landscape phones, less than 768px) */
 @media (max-width: 768px) {
     html {
         font-size: 14px;
@@ -1172,7 +1143,6 @@ select.form-control {
         gap: 15px;
     }
 
-    /* Mobile Navigation */
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -1216,7 +1186,6 @@ select.form-control {
         display: none;
     }
 
-    /* Show nav-actions in mobile menu */
     .nav-menu.active+.nav-actions,
     .mobile-nav-actions {
         display: flex;
@@ -1245,7 +1214,6 @@ select.form-control {
         grid-template-columns: 1fr;
     }
 
-    /* Dashboard */
     .dashboard-stats {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
@@ -1259,7 +1227,6 @@ select.form-control {
         font-size: 1.25rem;
     }
 
-    /* Tables */
     .table-responsive {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -1269,7 +1236,6 @@ select.form-control {
         min-width: 600px;
     }
 
-    /* Cards */
     .card {
         padding: 15px;
     }
@@ -1280,12 +1246,10 @@ select.form-control {
         gap: 10px;
     }
 
-    /* Forms */
     .form-group {
         margin-bottom: 15px;
     }
 
-    /* Payment Methods */
     .payment-methods {
         grid-template-columns: 1fr !important;
     }
@@ -1294,13 +1258,11 @@ select.form-control {
         padding: 15px;
     }
 
-    /* Buttons */
     .btn-lg {
         padding: 12px 20px;
         font-size: 0.9rem;
     }
 
-    /* Job Cards */
     .job-card {
         padding: 15px;
     }
@@ -1320,7 +1282,6 @@ select.form-control {
     }
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 576px) {
     .container {
         padding: 0 15px;
@@ -1354,7 +1315,6 @@ select.form-control {
         grid-template-columns: 1fr;
     }
 
-    /* Dashboard */
     .dashboard-stats {
         grid-template-columns: 1fr;
     }
@@ -1369,13 +1329,11 @@ select.form-control {
         font-size: 1.25rem;
     }
 
-    /* Sidebar */
     .sidebar-nav a {
         padding: 12px 15px;
         font-size: 0.9rem;
     }
 
-    /* Buttons */
     .btn {
         padding: 10px 16px;
         font-size: 0.875rem;
@@ -1386,7 +1344,6 @@ select.form-control {
         font-size: 0.8rem;
     }
 
-    /* Forms grid layout fix */
     div[style*="grid-template-columns: repeat(2"] {
         grid-template-columns: 1fr !important;
     }
@@ -1399,24 +1356,20 @@ select.form-control {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 
-    /* Flex gap adjustments */
     div[style*="gap: 20px"] {
         gap: 10px !important;
     }
 
-    /* Login/Register forms */
     .card[style*="max-width: 450px"],
     .card[style*="max-width: 500px"] {
         margin: 10px;
     }
 
-    /* Alert boxes */
     .alert {
         padding: 12px 15px;
         font-size: 0.9rem;
     }
 
-    /* Payment Info */
     .payment-info-box {
         padding: 15px;
     }
@@ -1429,7 +1382,6 @@ select.form-control {
         padding-left: 15px;
     }
 
-    /* Modal */
     .modal-content {
         width: 95%;
         margin: 10px;
@@ -1443,26 +1395,22 @@ select.form-control {
         padding: 15px;
     }
 
-    /* Admin/Employer Dashboard Stats Cards */
     div[style*="grid-template-columns: repeat(4, 1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 
-    /* Table Actions */
     .table td .btn {
         padding: 5px 8px;
         font-size: 0.75rem;
         margin: 2px;
     }
 
-    /* Badge adjustments */
     .badge {
         font-size: 0.7rem;
         padding: 3px 8px;
     }
 }
 
-/* Very small devices (less than 400px) */
 @media (max-width: 400px) {
     .logo {
         font-size: 1.25rem;
@@ -1480,7 +1428,6 @@ select.form-control {
         grid-template-columns: 1fr !important;
     }
 
-    /* Stack buttons vertically */
     div[style*="display: flex"][style*="gap"] {
         flex-direction: column;
     }
@@ -1490,7 +1437,6 @@ select.form-control {
     }
 }
 
-/* Landscape orientation fixes */
 @media (max-height: 500px) and (orientation: landscape) {
     .hero {
         padding: 80px 0 40px;
@@ -1502,7 +1448,6 @@ select.form-control {
     }
 }
 
-/* ========== Animations ========== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1519,7 +1464,6 @@ select.form-control {
     animation: fadeIn 0.5s ease forwards;
 }
 
-/* ========== Loading Spinner ========== */
 .spinner {
     width: 40px;
     height: 40px;
@@ -1548,7 +1492,6 @@ select.form-control {
     z-index: 9999;
 }
 
-/* ========== Modal Styles ========== */
 .modal {
     display: none;
     position: fixed;
@@ -1643,7 +1586,6 @@ select.form-control {
     gap: 10px;
 }
 
-/* ========== Payment Method Styles ========== */
 .payment-method-card {
     display: flex;
     flex-direction: column;
@@ -1672,22 +1614,18 @@ select.form-control {
     display: none;
 }
 
-/* bKash Brand Color */
 .payment-bkash {
     background: #E2136E;
 }
 
-/* Nagad Brand Color */
 .payment-nagad {
     background: #F6A21E;
 }
 
-/* Rocket Brand Color */
 .payment-rocket {
     background: #8C3494;
 }
 
-/* Payment Info Box */
 .payment-info-box {
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
     padding: 20px;
@@ -1701,7 +1639,6 @@ select.form-control {
     border-radius: var(--border-radius);
 }
 
-/* Receipt Styles */
 .receipt-container {
     text-align: center;
     padding: 20px;
@@ -1737,7 +1674,6 @@ select.form-control {
     margin-bottom: 0;
 }
 
-/* Bangladesh Taka Symbol */
 .taka {
     font-family: 'Inter', sans-serif;
 }
@@ -1746,7 +1682,6 @@ select.form-control {
     content: '৳';
 }
 
-/* Bootstrap Card Hover Effects */
 .hover-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

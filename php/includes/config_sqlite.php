@@ -1,36 +1,25 @@
 <?php
 
-/**
- * JobPortal - SQLite Configuration File
- * Use this instead of config_sqlite.php for SQLite database
- */
-
-// Error reporting (disable in production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Session configuration for persistence
 ini_set('session.cookie_lifetime', 86400 * 30); // 30 days
 ini_set('session.gc_maxlifetime', 86400 * 30); // 30 days
 ini_set('session.cookie_secure', false); // Set to true if using HTTPS
 ini_set('session.cookie_httponly', true);
 ini_set('session.use_only_cookies', true);
 
-// Start session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database Configuration - SQLite
 define('DB_TYPE', 'sqlite');
 define('DB_PATH', __DIR__ . '/jobportal.db');
 
-// Site Configuration
 define('SITE_NAME', 'JobPortal');
 define('SITE_URL', 'http://localhost/JobPortal');
 define('UPLOAD_PATH', __DIR__ . '/../../uploads/');
 
-// Create database connection (SQLite)
 function getDBConnection()
 {
     static $pdo = null;
@@ -40,7 +29,6 @@ function getDBConnection()
             $pdo = new PDO('sqlite:' . DB_PATH);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            // Enable foreign keys for SQLite
             $pdo->exec('PRAGMA foreign_keys = ON;');
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
@@ -50,7 +38,6 @@ function getDBConnection()
     return $pdo;
 }
 
-// Helper Functions
 function redirect($url)
 {
     header("Location: $url");
@@ -104,4 +91,3 @@ function timeAgo($datetime)
     if ($diff < 604800) return floor($diff / 86400) . ' days ago';
     return date('M d, Y', $time);
 }
-

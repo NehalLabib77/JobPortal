@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
@@ -29,143 +30,75 @@
         </div>
     </header>
 
-    <!-- Page Header -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 0 60px; color: white;">
+    <section
+        style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 0 60px; color: white;">
         <div class="container text-center">
             <h1 style="color: white;">Browse Companies</h1>
             <p style="opacity: 0.9;">Discover great places to work</p>
         </div>
     </section>
 
-    <!-- Search & Filter -->
     <section style="background: var(--gray-100); padding: 30px 0;">
         <div class="container">
             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                <input type="text" class="form-control" placeholder="Search companies..." style="flex: 1; min-width: 250px;">
-                <select class="form-control" style="width: 200px;">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search companies..."
+                    style="flex: 1; min-width: 250px;">
+                <select id="industryFilter" class="form-control" style="width: 200px;">
                     <option value="">All Industries</option>
                     <option value="technology">Technology</option>
                     <option value="finance">Finance</option>
                     <option value="healthcare">Healthcare</option>
                     <option value="retail">Retail</option>
                     <option value="manufacturing">Manufacturing</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="education">Education</option>
+                    <option value="consulting">Consulting</option>
+                    <option value="media">Media</option>
+                    <option value="energy">Energy</option>
+                    <option value="logistics">Logistics</option>
                 </select>
-                <select class="form-control" style="width: 200px;">
+                <select id="locationFilter" class="form-control" style="width: 200px;">
                     <option value="">All Locations</option>
                     <option value="new-york">New York</option>
                     <option value="san-francisco">San Francisco</option>
                     <option value="chicago">Chicago</option>
                     <option value="los-angeles">Los Angeles</option>
+                    <option value="boston">Boston</option>
+                    <option value="austin">Austin</option>
+                    <option value="seattle">Seattle</option>
+                    <option value="denver">Denver</option>
                 </select>
-                <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
             </div>
         </div>
     </section>
 
-    <!-- Companies Grid -->
     <section class="section">
         <div class="container">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <p style="margin: 0; color: var(--gray-600);">Showing <strong>48</strong> companies</p>
-                <select class="form-control" style="width: 200px;">
+                <p id="resultCount" style="margin: 0; color: var(--gray-600);">Showing <strong>48</strong> companies</p>
+                <select id="sortFilter" class="form-control" style="width: 200px;">
                     <option value="newest">Newest First</option>
                     <option value="name">Name A-Z</option>
                     <option value="jobs">Most Jobs</option>
                 </select>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
-                <!-- Company Card 1 -->
-                <div class="card company-card" style="text-align: center;">
-                    <img src="https://via.placeholder.com/100x100?text=TC" alt="TechCorp" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
-                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">TechCorp Inc.</a></h4>
-                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
-                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Leading technology company specializing in innovative software solutions for businesses worldwide.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                        <span class="badge badge-primary">Technology</span>
-                        <span class="badge badge-success">12 Jobs</span>
-                    </div>
-                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
-                </div>
-
-                <!-- Company Card 2 -->
-                <div class="card company-card" style="text-align: center;">
-                    <img src="https://via.placeholder.com/100x100?text=GH" alt="Global Health" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
-                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Global Health Inc.</a></h4>
-                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Boston, MA</p>
-                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Healthcare provider committed to improving patient outcomes through innovation and compassionate care.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                        <span class="badge badge-primary">Healthcare</span>
-                        <span class="badge badge-success">8 Jobs</span>
-                    </div>
-                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
-                </div>
-
-                <!-- Company Card 3 -->
-                <div class="card company-card" style="text-align: center;">
-                    <img src="https://via.placeholder.com/100x100?text=FS" alt="Finance Solutions" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
-                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Finance Solutions</a></h4>
-                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> New York, NY</p>
-                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Investment banking and financial services firm helping clients achieve their financial goals.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                        <span class="badge badge-primary">Finance</span>
-                        <span class="badge badge-success">15 Jobs</span>
-                    </div>
-                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
-                </div>
-
-                <!-- Company Card 4 -->
-                <div class="card company-card" style="text-align: center;">
-                    <img src="https://via.placeholder.com/100x100?text=DS" alt="Design Studio" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
-                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Creative Design Studio</a></h4>
-                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Los Angeles, CA</p>
-                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Award-winning design agency creating beautiful digital experiences for global brands.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                        <span class="badge badge-primary">Design</span>
-                        <span class="badge badge-success">6 Jobs</span>
-                    </div>
-                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
-                </div>
-
-                <!-- Company Card 5 -->
-                <div class="card company-card" style="text-align: center;">
-                    <img src="https://via.placeholder.com/100x100?text=ML" alt="Marketing Labs" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
-                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">Marketing Labs</a></h4>
-                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Chicago, IL</p>
-                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">Full-service digital marketing agency helping brands grow their online presence and reach.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                        <span class="badge badge-primary">Marketing</span>
-                        <span class="badge badge-success">10 Jobs</span>
-                    </div>
-                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
-                </div>
-
-                <!-- Company Card 6 -->
-                <div class="card company-card" style="text-align: center;">
-                    <img src="https://via.placeholder.com/100x100?text=EI" alt="EduInnovate" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
-                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">EduInnovate</a></h4>
-                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> Austin, TX</p>
-                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">EdTech company revolutionizing learning through technology and personalized education solutions.</p>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                        <span class="badge badge-primary">Education</span>
-                        <span class="badge badge-success">5 Jobs</span>
-                    </div>
-                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
-                </div>
+            <div id="companiesGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
             </div>
 
-            <!-- Pagination -->
-            <div class="pagination" style="margin-top: 40px;">
-                <a href="#" class="page-link active">1</a>
-                <a href="#" class="page-link">2</a>
-                <a href="#" class="page-link">3</a>
-                <a href="#" class="page-link">4</a>
-                <a href="#" class="page-link">Next <i class="fas fa-arrow-right"></i></a>
+            <div id="noResults" style="display: none; text-align: center; padding: 60px 20px;">
+                <i class="fas fa-building" style="font-size: 64px; color: var(--gray-300); margin-bottom: 20px;"></i>
+                <h3 style="color: var(--gray-600);">No companies found</h3>
+                <p style="color: var(--gray-500);">Try adjusting your search or filter criteria</p>
+            </div>
+
+            <div id="pagination" class="pagination" style="margin-top: 40px;">
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -185,7 +118,7 @@
                 <div class="footer-col">
                     <h4>For Employers</h4>
                     <ul>
-                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="post-job.php">Post a Job</a></li>
                         <li><a href="register.html?type=employer">Register</a></li>
                     </ul>
                 </div>
@@ -203,10 +136,222 @@
         </div>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Company data with 48 companies and real images
+        const companies = [
+            { id: 1, name: "TechCorp Inc.", location: "san-francisco", locationDisplay: "San Francisco, CA", industry: "technology", jobs: 12, description: "Leading technology company specializing in innovative software solutions for businesses worldwide.", image: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100&h=100&fit=crop" },
+            { id: 2, name: "Global Health Inc.", location: "boston", locationDisplay: "Boston, MA", industry: "healthcare", jobs: 8, description: "Healthcare provider committed to improving patient outcomes through innovation and compassionate care.", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=100&h=100&fit=crop" },
+            { id: 3, name: "Finance Solutions", location: "new-york", locationDisplay: "New York, NY", industry: "finance", jobs: 15, description: "Investment banking and financial services firm helping clients achieve their financial goals.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop" },
+            { id: 4, name: "Creative Design Studio", location: "los-angeles", locationDisplay: "Los Angeles, CA", industry: "design", jobs: 6, description: "Award-winning design agency creating beautiful digital experiences for global brands.", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop" },
+            { id: 5, name: "Marketing Labs", location: "chicago", locationDisplay: "Chicago, IL", industry: "marketing", jobs: 10, description: "Full-service digital marketing agency helping brands grow their online presence and reach.", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=100&h=100&fit=crop" },
+            { id: 6, name: "EduInnovate", location: "austin", locationDisplay: "Austin, TX", industry: "education", jobs: 5, description: "EdTech company revolutionizing learning through technology and personalized education solutions.", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=100&h=100&fit=crop" },
+            { id: 7, name: "CloudSync Technologies", location: "seattle", locationDisplay: "Seattle, WA", industry: "technology", jobs: 18, description: "Cloud computing solutions provider enabling businesses to scale efficiently and securely.", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=100&h=100&fit=crop" },
+            { id: 8, name: "MedTech Solutions", location: "boston", locationDisplay: "Boston, MA", industry: "healthcare", jobs: 11, description: "Medical technology company developing cutting-edge devices for improved patient care.", image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=100&h=100&fit=crop" },
+            { id: 9, name: "Capital Partners", location: "new-york", locationDisplay: "New York, NY", industry: "finance", jobs: 9, description: "Private equity firm specializing in growth investments across multiple sectors.", image: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=100&h=100&fit=crop" },
+            { id: 10, name: "RetailMax", location: "chicago", locationDisplay: "Chicago, IL", industry: "retail", jobs: 14, description: "Leading retail chain providing quality products and exceptional customer service nationwide.", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&h=100&fit=crop" },
+            { id: 11, name: "GreenEnergy Corp", location: "denver", locationDisplay: "Denver, CO", industry: "energy", jobs: 7, description: "Renewable energy company committed to sustainable solutions for a cleaner future.", image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=100&h=100&fit=crop" },
+            { id: 12, name: "DataDriven Analytics", location: "san-francisco", locationDisplay: "San Francisco, CA", industry: "technology", jobs: 16, description: "Big data analytics firm helping companies make smarter decisions through data insights.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop" },
+            { id: 13, name: "HealthFirst Clinics", location: "los-angeles", locationDisplay: "Los Angeles, CA", industry: "healthcare", jobs: 13, description: "Network of healthcare clinics providing accessible and affordable medical services.", image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=100&h=100&fit=crop" },
+            { id: 14, name: "Strategic Consulting Group", location: "chicago", locationDisplay: "Chicago, IL", industry: "consulting", jobs: 8, description: "Management consulting firm helping businesses optimize operations and drive growth.", image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=100&h=100&fit=crop" },
+            { id: 15, name: "MediaWave Productions", location: "los-angeles", locationDisplay: "Los Angeles, CA", industry: "media", jobs: 9, description: "Entertainment production company creating compelling content for film and television.", image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=100&h=100&fit=crop" },
+            { id: 16, name: "LogiTrans Shipping", location: "chicago", locationDisplay: "Chicago, IL", industry: "logistics", jobs: 11, description: "Global logistics company providing efficient shipping and supply chain solutions.", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=100&h=100&fit=crop" },
+            { id: 17, name: "InnovateTech Labs", location: "austin", locationDisplay: "Austin, TX", industry: "technology", jobs: 14, description: "Research and development lab focused on emerging technologies and breakthrough innovations.", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=100&h=100&fit=crop" },
+            { id: 18, name: "WealthBridge Advisors", location: "new-york", locationDisplay: "New York, NY", industry: "finance", jobs: 6, description: "Wealth management firm providing personalized financial planning and investment services.", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop" },
+            { id: 19, name: "PixelPerfect Design", location: "san-francisco", locationDisplay: "San Francisco, CA", industry: "design", jobs: 7, description: "UI/UX design studio crafting intuitive and beautiful digital products.", image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=100&h=100&fit=crop" },
+            { id: 20, name: "BrandBoost Agency", location: "new-york", locationDisplay: "New York, NY", industry: "marketing", jobs: 12, description: "Creative marketing agency specializing in brand strategy and digital campaigns.", image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=100&h=100&fit=crop" },
+            { id: 21, name: "LearnSmart Academy", location: "boston", locationDisplay: "Boston, MA", industry: "education", jobs: 8, description: "Online learning platform offering courses and certifications for professional development.", image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=100&h=100&fit=crop" },
+            { id: 22, name: "AutoMotive Plus", location: "chicago", locationDisplay: "Chicago, IL", industry: "manufacturing", jobs: 10, description: "Automotive parts manufacturer delivering quality components to major car brands.", image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=100&h=100&fit=crop" },
+            { id: 23, name: "CyberShield Security", location: "seattle", locationDisplay: "Seattle, WA", industry: "technology", jobs: 9, description: "Cybersecurity firm protecting businesses from digital threats and data breaches.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=100&h=100&fit=crop" },
+            { id: 24, name: "BioGenetics Research", location: "boston", locationDisplay: "Boston, MA", industry: "healthcare", jobs: 7, description: "Biotechnology company advancing genetic research for medical breakthroughs.", image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=100&h=100&fit=crop" },
+            { id: 25, name: "Prime Investments", location: "new-york", locationDisplay: "New York, NY", industry: "finance", jobs: 11, description: "Investment firm offering diverse portfolio management and trading services.", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&h=100&fit=crop" },
+            { id: 26, name: "ShopSmart Retail", location: "los-angeles", locationDisplay: "Los Angeles, CA", industry: "retail", jobs: 16, description: "E-commerce platform connecting customers with quality products at great prices.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=100&h=100&fit=crop" },
+            { id: 27, name: "SolarTech Energy", location: "denver", locationDisplay: "Denver, CO", industry: "energy", jobs: 8, description: "Solar energy company providing clean power solutions for homes and businesses.", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=100&h=100&fit=crop" },
+            { id: 28, name: "AI Dynamics", location: "san-francisco", locationDisplay: "San Francisco, CA", industry: "technology", jobs: 20, description: "Artificial intelligence company developing smart solutions for complex problems.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=100&h=100&fit=crop" },
+            { id: 29, name: "CareFirst Medical", location: "chicago", locationDisplay: "Chicago, IL", industry: "healthcare", jobs: 12, description: "Healthcare system providing comprehensive medical services across multiple facilities.", image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=100&h=100&fit=crop" },
+            { id: 30, name: "Apex Consulting", location: "boston", locationDisplay: "Boston, MA", industry: "consulting", jobs: 9, description: "Business consulting firm specializing in digital transformation and strategy.", image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=100&h=100&fit=crop" },
+            { id: 31, name: "StreamLine Media", location: "los-angeles", locationDisplay: "Los Angeles, CA", industry: "media", jobs: 11, description: "Digital media company creating engaging content for streaming platforms.", image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop" },
+            { id: 32, name: "FastFreight Logistics", location: "chicago", locationDisplay: "Chicago, IL", industry: "logistics", jobs: 13, description: "Express delivery and logistics company serving businesses nationwide.", image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=100&h=100&fit=crop" },
+            { id: 33, name: "NextGen Software", location: "austin", locationDisplay: "Austin, TX", industry: "technology", jobs: 15, description: "Software development company building next-generation enterprise applications.", image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=100&h=100&fit=crop" },
+            { id: 34, name: "SecureBank Financial", location: "new-york", locationDisplay: "New York, NY", industry: "finance", jobs: 14, description: "Digital banking platform offering secure and convenient financial services.", image: "https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=100&h=100&fit=crop" },
+            { id: 35, name: "Artisan Studios", location: "san-francisco", locationDisplay: "San Francisco, CA", industry: "design", jobs: 5, description: "Creative studio specializing in branding, illustration, and visual design.", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=100&h=100&fit=crop" },
+            { id: 36, name: "GrowthHackers Inc.", location: "austin", locationDisplay: "Austin, TX", industry: "marketing", jobs: 8, description: "Growth marketing agency helping startups scale rapidly through data-driven strategies.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&h=100&fit=crop" },
+            { id: 37, name: "EduPath Online", location: "seattle", locationDisplay: "Seattle, WA", industry: "education", jobs: 6, description: "E-learning company providing accessible education to learners worldwide.", image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=100&h=100&fit=crop" },
+            { id: 38, name: "PrecisionMfg Co.", location: "chicago", locationDisplay: "Chicago, IL", industry: "manufacturing", jobs: 9, description: "Precision manufacturing company producing high-quality industrial components.", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop" },
+            { id: 39, name: "BlockChain Ventures", location: "san-francisco", locationDisplay: "San Francisco, CA", industry: "technology", jobs: 11, description: "Blockchain technology company developing decentralized solutions for enterprises.", image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=100&h=100&fit=crop" },
+            { id: 40, name: "Wellness Plus Health", location: "denver", locationDisplay: "Denver, CO", industry: "healthcare", jobs: 7, description: "Wellness company promoting holistic health through innovative programs and services.", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop" },
+            { id: 41, name: "TrustFund Advisors", location: "boston", locationDisplay: "Boston, MA", industry: "finance", jobs: 8, description: "Financial advisory firm specializing in trust management and estate planning.", image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=100&h=100&fit=crop" },
+            { id: 42, name: "FashionForward Retail", location: "new-york", locationDisplay: "New York, NY", industry: "retail", jobs: 10, description: "Fashion retail company bringing the latest trends to style-conscious consumers.", image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=100&h=100&fit=crop" },
+            { id: 43, name: "WindPower Systems", location: "denver", locationDisplay: "Denver, CO", industry: "energy", jobs: 6, description: "Wind energy company developing sustainable power solutions for communities.", image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=100&h=100&fit=crop" },
+            { id: 44, name: "RoboTech Industries", location: "seattle", locationDisplay: "Seattle, WA", industry: "technology", jobs: 13, description: "Robotics company creating automated solutions for manufacturing and logistics.", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=100&h=100&fit=crop" },
+            { id: 45, name: "InsightWorks Consulting", location: "chicago", locationDisplay: "Chicago, IL", industry: "consulting", jobs: 7, description: "Analytics consulting firm helping businesses unlock value from their data.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=100&h=100&fit=crop" },
+            { id: 46, name: "BrightNews Media", location: "new-york", locationDisplay: "New York, NY", industry: "media", jobs: 9, description: "Digital news platform delivering accurate and timely journalism to readers.", image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=100&h=100&fit=crop" },
+            { id: 47, name: "QuickShip Express", location: "los-angeles", locationDisplay: "Los Angeles, CA", industry: "logistics", jobs: 12, description: "Same-day delivery service connecting businesses with fast shipping solutions.", image: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=100&h=100&fit=crop" },
+            { id: 48, name: "FutureTech Innovations", location: "austin", locationDisplay: "Austin, TX", industry: "technology", jobs: 17, description: "Innovation lab exploring emerging technologies and developing future solutions.", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=100&h=100&fit=crop" }
+        ];
+
+        // DOM Elements
+        const companiesGrid = document.getElementById('companiesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const industryFilter = document.getElementById('industryFilter');
+        const locationFilter = document.getElementById('locationFilter');
+        const sortFilter = document.getElementById('sortFilter');
+        const searchBtn = document.getElementById('searchBtn');
+        const resultCount = document.getElementById('resultCount');
+        const noResults = document.getElementById('noResults');
+        const pagination = document.getElementById('pagination');
+
+        // Pagination settings
+        const itemsPerPage = 12;
+        let currentPage = 1;
+        let filteredCompanies = [...companies];
+
+        // Industry badge colors
+        const industryColors = {
+            'technology': 'primary',
+            'healthcare': 'danger',
+            'finance': 'success',
+            'design': 'secondary',
+            'marketing': 'warning',
+            'education': 'info',
+            'retail': 'primary',
+            'manufacturing': 'dark',
+            'consulting': 'success',
+            'media': 'danger',
+            'energy': 'warning',
+            'logistics': 'info'
+        };
+
+        // Render company card
+        function renderCompanyCard(company) {
+            const badgeColor = industryColors[company.industry] || 'primary';
+            return `
+                <div class="card company-card" data-industry="${company.industry}" data-location="${company.location}" data-name="${company.name.toLowerCase()}" style="text-align: center;">
+                    <img src="${company.image}" alt="${company.name}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
+                    <h4 style="margin-bottom: 5px;"><a href="company-single.html">${company.name}</a></h4>
+                    <p style="color: var(--gray-500); margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> ${company.locationDisplay}</p>
+                    <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 15px;">${company.description}</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <span class="badge badge-${badgeColor}">${company.industry.charAt(0).toUpperCase() + company.industry.slice(1)}</span>
+                        <span class="badge badge-success">${company.jobs} Jobs</span>
+                    </div>
+                    <a href="company-single.html" class="btn btn-outline btn-sm" style="width: 100%;">View Company</a>
+                </div>
+            `;
+        }
+
+        // Filter and render companies
+        function filterAndRender() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const industry = industryFilter.value;
+            const location = locationFilter.value;
+            const sortBy = sortFilter.value;
+
+            // Filter companies
+            filteredCompanies = companies.filter(company => {
+                const matchesSearch = !searchTerm ||
+                    company.name.toLowerCase().includes(searchTerm) ||
+                    company.description.toLowerCase().includes(searchTerm);
+                const matchesIndustry = !industry || company.industry === industry;
+                const matchesLocation = !location || company.location === location;
+                return matchesSearch && matchesIndustry && matchesLocation;
+            });
+
+            // Sort companies
+            filteredCompanies.sort((a, b) => {
+                if (sortBy === 'name') return a.name.localeCompare(b.name);
+                if (sortBy === 'jobs') return b.jobs - a.jobs;
+                return b.id - a.id; // newest first (default)
+            });
+
+            // Reset to page 1 when filtering
+            currentPage = 1;
+            renderPage();
+        }
+
+        // Render current page
+        function renderPage() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageCompanies = filteredCompanies.slice(startIndex, endIndex);
+
+            if (filteredCompanies.length === 0) {
+                companiesGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                pagination.style.display = 'none';
+                resultCount.innerHTML = 'Showing <strong>0</strong> companies';
+            } else {
+                companiesGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+                pagination.style.display = 'flex';
+                companiesGrid.innerHTML = pageCompanies.map(renderCompanyCard).join('');
+                resultCount.innerHTML = `Showing <strong>${filteredCompanies.length}</strong> companies`;
+            }
+
+            renderPagination();
+        }
+
+        // Render pagination
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredCompanies.length / itemsPerPage);
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+
+            // Previous button
+            if (currentPage > 1) {
+                html += `<a href="#" class="page-link" data-page="${currentPage - 1}"><i class="fas fa-arrow-left"></i> Prev</a>`;
+            }
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    html += `<a href="#" class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>`;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    html += `<span style="padding: 10px;">...</span>`;
+                }
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                html += `<a href="#" class="page-link" data-page="${currentPage + 1}">Next <i class="fas fa-arrow-right"></i></a>`;
+            }
+
+            pagination.innerHTML = html;
+
+            // Add click handlers
+            pagination.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = parseInt(e.target.closest('.page-link').dataset.page);
+                    renderPage();
+                    window.scrollTo({ top: 300, behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Event listeners
+        searchBtn.addEventListener('click', filterAndRender);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') filterAndRender();
+        });
+        industryFilter.addEventListener('change', filterAndRender);
+        locationFilter.addEventListener('change', filterAndRender);
+        sortFilter.addEventListener('change', filterAndRender);
+
+        // Live search (debounced)
+        let searchTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(filterAndRender, 300);
+        });
+
+        // Initial render
+        filterAndRender();
+    </script>
 </body>
+
 </html>
-
-
-
-

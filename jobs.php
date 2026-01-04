@@ -3,12 +3,10 @@
 require_once 'php/includes/config.php';
 require_once 'php/includes/functions.php';
 
-// Check if user is logged in to show appropriate navigation
 $isLoggedIn = isset($_SESSION['user_id']);
 $userType = $_SESSION['user_type'] ?? null;
 $userName = $_SESSION['user_name'] ?? 'User';
 
-// Get search filters
 $filters = [];
 if (!empty($_GET['keyword'])) $filters['keyword'] = $_GET['keyword'];
 if (!empty($_GET['location'])) $filters['location'] = $_GET['location'];

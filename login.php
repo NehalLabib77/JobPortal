@@ -2,7 +2,6 @@
 <?php
 require_once 'php/includes/config.php';
 
-// Check if already logged in
 if (isset($_SESSION['user_id'])) {
     if ($_SESSION['user_type'] === 'admin') {
         header('Location: dashboard-admin.php');
@@ -127,7 +126,7 @@ if (isset($_SESSION['user_id'])) {
         }
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            // Show loading state
+
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';

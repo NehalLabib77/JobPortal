@@ -2,7 +2,6 @@
 <?php
 require_once 'php/includes/config.php';
 
-// Check if user is logged in and is an employer
 if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'employer') {
     header('Location: login.php');
     exit();
@@ -858,13 +857,11 @@ $userEmail = $_SESSION['user_email'] ?? '';
             });
             event.currentTarget.classList.add('active');
 
-            // Load interviews if interviews tab is selected
             if (tabName === 'interviews') {
                 loadEmployerInterviews();
             }
         }
 
-        // View Candidate Details
         function viewCandidate(id, name, email, phone, skills, experience, appliedFor) {
             const candidateHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -928,7 +925,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             openModal('candidateModal', 'Candidate Details', candidateHTML);
         }
 
-        // Shortlist Candidate
         function shortlistCandidate(id) {
             const statusBadge = document.getElementById('status-' + id);
             const shortlistBtn = document.getElementById('shortlist-btn-' + id);
@@ -945,7 +941,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             showNotification('Candidate shortlisted successfully!', 'success');
         }
 
-        // Reject Candidate
         function rejectCandidate(id) {
             const statusBadge = document.getElementById('status-' + id);
             const row = document.getElementById('app-' + id);
@@ -955,13 +950,11 @@ $userEmail = $_SESSION['user_email'] ?? '';
                 statusBadge.textContent = 'Rejected';
             }
 
-            // Grey out the row
             if (row) {
                 row.style.opacity = '0.5';
                 row.style.background = 'var(--gray-100)';
             }
 
-            // Replace buttons
             const actionCell = row.querySelector('td:last-child');
             if (actionCell) {
                 actionCell.innerHTML = `
@@ -973,7 +966,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             showNotification('Candidate rejected.', 'warning');
         }
 
-        // Undo Reject
         function undoReject(id) {
             const statusBadge = document.getElementById('status-' + id);
             const row = document.getElementById('app-' + id);
@@ -988,7 +980,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
                 row.style.background = '';
             }
 
-            // Restore buttons
             const actionCell = row.querySelector('td:last-child');
             if (actionCell) {
                 actionCell.innerHTML = `
@@ -1001,12 +992,10 @@ $userEmail = $_SESSION['user_email'] ?? '';
             showNotification('Action undone.', 'info');
         }
 
-        // Message Candidate
         function messageCandidate(id) {
             showNotification('Opening message composer... (Demo)', 'info');
         }
 
-        // AI Shortlisting Modal
         function openAIShortlistModal() {
             const aiHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -1052,7 +1041,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
 
             openModal('aiModal', '<i class="fas fa-robot"></i> AI Shortlisting', aiHTML);
 
-            // Add range slider listener
             setTimeout(() => {
                 const rangeSlider = document.getElementById('aiScoreRange');
                 const scoreValue = document.getElementById('aiScoreValue');
@@ -1064,12 +1052,10 @@ $userEmail = $_SESSION['user_email'] ?? '';
             }, 100);
         }
 
-        // Run AI Shortlisting
         function runAIShortlisting() {
             const modal = document.getElementById('aiModal');
             const modalBody = modal.querySelector('.modal-body');
 
-            // Show loading
             modalBody.innerHTML = `
                 <div style="text-align: center; padding: 40px;">
                     <div class="spinner" style="width: 60px; height: 60px; border: 4px solid var(--gray-200); border-top: 4px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
@@ -1078,7 +1064,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
                 </div>
             `;
 
-            // Simulate AI processing
             setTimeout(() => {
                 modalBody.innerHTML = `
                     <div style="text-align: center; margin-bottom: 20px;">
@@ -1141,16 +1126,13 @@ $userEmail = $_SESSION['user_email'] ?? '';
             }, 2000);
         }
 
-        // Auto Shortlist Top Candidates
         function autoShortlistTop() {
             shortlistCandidate(1);
             shortlistCandidate(3);
             showNotification('Top 2 candidates have been shortlisted!', 'success');
         }
 
-        // Generic Modal Functions
         function openModal(modalId, title, content) {
-            // Create modal if not exists
             if (!document.getElementById(modalId)) {
                 const modal = document.createElement('div');
                 modal.id = modalId;
@@ -1185,7 +1167,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             closeModal('candidateModal');
         }
 
-        // Notification System
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             notification.className = 'notification notification-' + type;
@@ -1261,7 +1242,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
                 </div>
             `;
 
-            // Create modal if not exists
             if (!document.getElementById('receiptModal')) {
                 const modal = document.createElement('div');
                 modal.id = 'receiptModal';
@@ -1291,7 +1271,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             window.print();
         }
 
-        // Interview Management Functions
         async function loadEmployerInterviews() {
             try {
                 const response = await fetch('php/api/interview-api.php?action=list');
@@ -1308,7 +1287,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             }
         }
 
-        // Auto-refresh interviews every 30 seconds
         setInterval(() => {
             if (document.getElementById('interviews-tab') && !document.getElementById('interviews-tab').classList.contains('hidden')) {
                 loadEmployerInterviews();
@@ -1470,7 +1448,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
         }
 
         function editInterview(interviewId) {
-            // Implement edit functionality
             showNotification('Edit functionality coming soon!', 'info');
         }
 

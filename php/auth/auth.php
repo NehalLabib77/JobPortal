@@ -1,42 +1,31 @@
 <?php
 
-/**
- * JobPortal - User Authentication Functions
- */
-
 require_once __DIR__ . '/../includes/config.php';
 
-// Register new user
 function registerUser($data)
 {
     $pdo = getDBConnection();
 
-    // Validate required fields
     if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
         return ['success' => false, 'message' => 'All fields are required.'];
     }
 
-    // Validate email
     if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
         return ['success' => false, 'message' => 'Invalid email format.'];
     }
 
-    // Check if email exists
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
     $stmt->execute([$data['email']]);
     if ($stmt->fetch()) {
         return ['success' => false, 'message' => 'Email already registered.'];
     }
 
-    // Validate password length
     if (strlen($data['password']) < 6) {
         return ['success' => false, 'message' => 'Password must be at least 6 characters.'];
     }
 
-    // Hash password
     $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
-    // Insert user
     $stmt = $pdo->prepare("INSERT INTO users (name, email, password, user_type) VALUES (?, ?, ?, ?)");
     $userType = isset($data['user_type']) && in_array($data['user_type'], ['candidate', 'employer'])
         ? $data['user_type'] : 'candidate';
@@ -45,7 +34,6 @@ function registerUser($data)
         $stmt->execute([$data['name'], $data['email'], $hashedPassword, $userType]);
         $userId = $pdo->lastInsertId();
 
-        // If employer, create company record
         if ($userType === 'employer' && !empty($data['company_name'])) {
             $companySlug = generateSlug($data['company_name']) . '-' . $userId;
             $stmt = $pdo->prepare("INSERT INTO companies (user_id, name, slug) VALUES (?, ?, ?)");
@@ -58,7 +46,6 @@ function registerUser($data)
     }
 }
 
-// Login user
 function loginUser($email, $password)
 {
     $pdo = getDBConnection();
@@ -75,7 +62,6 @@ function loginUser($email, $password)
         return ['success' => false, 'message' => 'Invalid email or password.'];
     }
 
-    // Set session
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_name'] = $user['name'];
     $_SESSION['user_email'] = $user['email'];
@@ -85,14 +71,12 @@ function loginUser($email, $password)
     return ['success' => true, 'message' => 'Login successful!', 'user' => $user];
 }
 
-// Logout user
 function logoutUser()
 {
     session_destroy();
     return ['success' => true, 'message' => 'Logged out successfully.'];
 }
 
-// Update user profile
 function updateProfile($userId, $data)
 {
     $pdo = getDBConnection();
@@ -119,7 +103,6 @@ function updateProfile($userId, $data)
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
 
-        // Update session name if changed
         if (isset($data['name'])) {
             $_SESSION['user_name'] = $data['name'];
         }
@@ -130,7 +113,6 @@ function updateProfile($userId, $data)
     }
 }
 
-// Update avatar
 function updateAvatar($userId, $file)
 {
     if ($file['error'] !== UPLOAD_ERR_OK) {
@@ -162,7 +144,6 @@ function updateAvatar($userId, $file)
     return ['success' => false, 'message' => 'Failed to upload file.'];
 }
 
-// Change password
 function changePassword($userId, $currentPassword, $newPassword)
 {
     $pdo = getDBConnection();

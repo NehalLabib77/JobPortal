@@ -1,44 +1,16 @@
-/**
- * JobPortal - Main JavaScript File
- * Handles all frontend interactivity
- */
-
 document.addEventListener('DOMContentLoaded', function () {
-
-    // Mobile Menu Toggle
     initMobileMenu();
-
-    // Header Scroll Effect
     initHeaderScroll();
-
-    // Form Validation
     initFormValidation();
-
-    // Search & Filter Functions
     initSearchFilters();
-
-    // Modal Functions
     initModals();
-
-    // Tab Navigation
     initTabs();
-
-    // Bookmark/Save Jobs
     initBookmarks();
-
-    // Character Counter
     initCharCounter();
-
-    // Password Toggle
     initPasswordToggle();
-
-    // Alert Messages
     initAlerts();
 });
 
-/**
- * Mobile Menu Toggle
- */
 function initMobileMenu() {
     const menuToggle = document.querySelector('.mobile-toggle, .menu-toggle, #mobileToggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -50,7 +22,6 @@ function initMobileMenu() {
             navMenu.classList.toggle('active');
             this.classList.toggle('active');
 
-            // Toggle hamburger icon
             const icon = this.querySelector('i');
             if (icon) {
                 if (navMenu.classList.contains('active')) {
@@ -63,7 +34,6 @@ function initMobileMenu() {
             }
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', function (e) {
             if (!e.target.closest('.navbar') && !e.target.closest('.nav-menu')) {
                 navMenu.classList.remove('active');
@@ -77,7 +47,6 @@ function initMobileMenu() {
             }
         });
 
-        // Close menu when clicking on a link
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function () {
                 navMenu.classList.remove('active');
@@ -93,9 +62,6 @@ function initMobileMenu() {
     }
 }
 
-/**
- * Header Scroll Effect
- */
 function initHeaderScroll() {
     const header = document.querySelector('.header');
 
@@ -110,9 +76,6 @@ function initHeaderScroll() {
     }
 }
 
-/**
- * Form Validation
- */
 function initFormValidation() {
     const forms = document.querySelectorAll('form[data-validate]');
 
@@ -120,11 +83,9 @@ function initFormValidation() {
         form.addEventListener('submit', function (e) {
             let isValid = true;
 
-            // Clear previous errors
             form.querySelectorAll('.error-message').forEach(el => el.remove());
             form.querySelectorAll('.form-control.error').forEach(el => el.classList.remove('error'));
 
-            // Check required fields
             const requiredFields = form.querySelectorAll('[required]');
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
@@ -133,7 +94,6 @@ function initFormValidation() {
                 }
             });
 
-            // Check email fields
             const emailFields = form.querySelectorAll('[type="email"]');
             emailFields.forEach(field => {
                 if (field.value && !isValidEmail(field.value)) {
@@ -142,7 +102,6 @@ function initFormValidation() {
                 }
             });
 
-            // Check password match
             const password = form.querySelector('[name="password"]');
             const confirmPassword = form.querySelector('[name="password_confirm"]');
             if (password && confirmPassword && password.value !== confirmPassword.value) {
@@ -150,7 +109,6 @@ function initFormValidation() {
                 showFieldError(confirmPassword, 'Passwords do not match');
             }
 
-            // Check minimum password length
             if (password && password.value && password.value.length < 6) {
                 isValid = false;
                 showFieldError(password, 'Password must be at least 6 characters');
@@ -176,11 +134,7 @@ function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-/**
- * Search & Filter Functions
- */
 function initSearchFilters() {
-    // Job search form
     const searchForm = document.querySelector('.search-form');
     if (searchForm) {
         searchForm.addEventListener('submit', function (e) {
@@ -191,7 +145,6 @@ function initSearchFilters() {
         });
     }
 
-    // Sidebar filters
     const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
     filterCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function () {
@@ -199,7 +152,6 @@ function initSearchFilters() {
         });
     });
 
-    // Price range slider
     const priceRange = document.querySelector('.price-range');
     if (priceRange) {
         priceRange.addEventListener('input', function () {
@@ -210,7 +162,6 @@ function initSearchFilters() {
 }
 
 function applyFilters() {
-    // Collect all filter values
     const filters = {};
 
     document.querySelectorAll('.filter-checkbox:checked').forEach(cb => {
@@ -219,16 +170,10 @@ function applyFilters() {
         filters[name].push(cb.value);
     });
 
-    // Apply filters via AJAX or redirect
     console.log('Applying filters:', filters);
-    // Implementation depends on backend
 }
 
-/**
- * Modal Functions
- */
 function initModals() {
-    // Open modal
     document.querySelectorAll('[data-modal]').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
@@ -241,14 +186,12 @@ function initModals() {
         });
     });
 
-    // Close modal
     document.querySelectorAll('.modal-close, .modal-overlay').forEach(el => {
         el.addEventListener('click', function () {
             closeAllModals();
         });
     });
 
-    // Close on ESC key
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             closeAllModals();
@@ -279,9 +222,6 @@ function closeModal(modalId) {
     }
 }
 
-/**
- * Tab Navigation
- */
 function initTabs() {
     document.querySelectorAll('.tab-link').forEach(tab => {
         tab.addEventListener('click', function (e) {
@@ -290,12 +230,10 @@ function initTabs() {
             const tabGroup = this.closest('.tabs') || this.closest('.dashboard-sidebar');
             const targetId = this.dataset.tab;
 
-            // Update active tab
             const allTabs = tabGroup ? tabGroup.querySelectorAll('.tab-link') : document.querySelectorAll('.tab-link');
             allTabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
 
-            // Show target content
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
                 content.classList.remove('active');
@@ -307,9 +245,6 @@ function initTabs() {
     });
 }
 
-/**
- * Bookmark/Save Jobs
- */
 function initBookmarks() {
     document.querySelectorAll('.bookmark-btn').forEach(btn => {
         btn.addEventListener('click', function (e) {
@@ -326,18 +261,13 @@ function initBookmarks() {
                 showToast('Job removed from bookmarks');
             }
 
-            // Send AJAX request to save/unsave
             const jobId = this.dataset.jobId;
             if (jobId) {
-                // saveJob(jobId);
             }
         });
     });
 }
 
-/**
- * Character Counter for Textareas
- */
 function initCharCounter() {
     document.querySelectorAll('textarea[maxlength]').forEach(textarea => {
         const maxLength = textarea.getAttribute('maxlength');
@@ -356,9 +286,6 @@ function initCharCounter() {
     });
 }
 
-/**
- * Password Toggle Visibility
- */
 function initPasswordToggle() {
     document.querySelectorAll('.password-toggle').forEach(btn => {
         btn.addEventListener('click', function () {
@@ -378,9 +305,6 @@ function initPasswordToggle() {
     });
 }
 
-/**
- * Alert Messages
- */
 function initAlerts() {
     document.querySelectorAll('.alert .close-btn').forEach(btn => {
         btn.addEventListener('click', function () {
@@ -388,7 +312,6 @@ function initAlerts() {
         });
     });
 
-    // Auto-dismiss alerts after 5 seconds
     document.querySelectorAll('.alert[data-auto-dismiss]').forEach(alert => {
         setTimeout(() => {
             alert.remove();
@@ -396,9 +319,6 @@ function initAlerts() {
     });
 }
 
-/**
- * Toast Notifications
- */
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
@@ -430,9 +350,6 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-/**
- * AJAX Helper Functions
- */
 async function fetchData(url, options = {}) {
     try {
         const response = await fetch(url, {
@@ -462,9 +379,6 @@ async function postData(url, data) {
     });
 }
 
-/**
- * Utility Functions
- */
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -496,9 +410,6 @@ function truncateText(text, maxLength) {
     return text.substring(0, maxLength) + '...';
 }
 
-/**
- * File Upload Preview
- */
 function initFileUpload() {
     document.querySelectorAll('input[type="file"]').forEach(input => {
         input.addEventListener('change', function () {
@@ -518,9 +429,6 @@ function initFileUpload() {
     });
 }
 
-/**
- * Smooth Scroll
- */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
@@ -537,7 +445,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add CSS animation keyframes
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {

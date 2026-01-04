@@ -1,22 +1,15 @@
 <?php
 
-/**
- * Create Job Handler
- * Processes job posting with payment
- */
-
 require_once '../includes/config.php';
 require_once '../jobs/jobs.php';
 require_once '../payments/payment-handler.php';
 
-// Check if user is logged in and is employer
 if (!isLoggedIn() || !isEmployer()) {
     $_SESSION['error'] = 'Please login as an employer to post jobs.';
     redirect('../login.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate payment details
     $paymentMethod = $_POST['payment_method'] ?? '';
     $payerPhone = $_POST['payer_phone'] ?? '';
     $payerName = $_POST['payer_name'] ?? '';
@@ -27,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('../post-job.html');
     }
 
-    // Create the job first (as draft)
     $jobData = [
         'title' => $_POST['title'] ?? '',
         'category_id' => $_POST['category_id'] ?? null,
@@ -55,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $jobId = $jobResult['job_id'];
 
-    // Create payment record
     $paymentData = [
         'job_id' => $jobId,
         'payment_method' => $paymentMethod,
@@ -71,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['success'] = 'Job submitted successfully! Your payment is being verified. Transaction ID: ' . $paymentResult['transaction_id'];
         $_SESSION['transaction_id'] = $paymentResult['transaction_id'];
     } else {
-        // Rollback - delete the job if payment fails
         $pdo = getDBConnection();
         $stmt = $pdo->prepare("DELETE FROM jobs WHERE id = ?");
         $stmt->execute([$jobId]);

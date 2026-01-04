@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Jobs API
- * RESTful API for job operations
- */
-
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -33,9 +28,6 @@ switch ($method) {
         jsonResponse(['error' => 'Method not allowed'], 405);
 }
 
-/**
- * Handle GET requests
- */
 function handleGetRequest($action)
 {
     switch ($action) {
@@ -90,18 +82,13 @@ function handleGetRequest($action)
             break;
 
         default:
-            // Default to list all active jobs
             $jobs = getJobs(['limit' => 10]);
             jsonResponse(['success' => true, 'data' => $jobs]);
     }
 }
 
-/**
- * Handle POST requests
- */
 function handlePostRequest($action)
 {
-    // Check authentication
     if (!isLoggedIn()) {
         jsonResponse(['error' => 'Authentication required'], 401);
     }
@@ -150,9 +137,6 @@ function handlePostRequest($action)
     }
 }
 
-/**
- * Handle PUT requests (Update)
- */
 function handlePutRequest($action)
 {
     if (!isLoggedIn() || $_SESSION['user']['role'] !== 'employer') {
@@ -191,9 +175,6 @@ function handlePutRequest($action)
     }
 }
 
-/**
- * Handle DELETE requests
- */
 function handleDeleteRequest($action)
 {
     if (!isLoggedIn() || $_SESSION['user']['role'] !== 'employer') {
@@ -217,9 +198,6 @@ function handleDeleteRequest($action)
     }
 }
 
-/**
- * Send JSON response
- */
 function jsonResponse($data, $statusCode = 200)
 {
     http_response_code($statusCode);

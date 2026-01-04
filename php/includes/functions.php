@@ -1,12 +1,7 @@
 <?php
 
-/**
- * JobPortal - Helper Functions
- */
-
 require_once 'config.php';
 
-// Get all jobs with filters
 function getJobs($filters = [], $limit = 10, $offset = 0)
 {
     $pdo = getDBConnection();
@@ -53,7 +48,6 @@ function getJobs($filters = [], $limit = 10, $offset = 0)
     return $stmt->fetchAll();
 }
 
-// Get single job by ID or slug
 function getJob($identifier)
 {
     $pdo = getDBConnection();
@@ -74,7 +68,6 @@ function getJob($identifier)
     return $stmt->fetch();
 }
 
-// Increment job views
 function incrementJobViews($jobId)
 {
     $pdo = getDBConnection();
@@ -82,7 +75,6 @@ function incrementJobViews($jobId)
     $stmt->execute([$jobId]);
 }
 
-// Get all categories
 function getCategories()
 {
     $pdo = getDBConnection();
@@ -94,7 +86,6 @@ function getCategories()
     return $stmt->fetchAll();
 }
 
-// Get featured jobs
 function getFeaturedJobs($limit = 6)
 {
     $pdo = getDBConnection();
@@ -108,7 +99,6 @@ function getFeaturedJobs($limit = 6)
     return $stmt->fetchAll();
 }
 
-// Get recent jobs
 function getRecentJobs($limit = 5)
 {
     $pdo = getDBConnection();
@@ -122,7 +112,6 @@ function getRecentJobs($limit = 5)
     return $stmt->fetchAll();
 }
 
-// Check if user has applied for a job
 function hasApplied($userId, $jobId)
 {
     $pdo = getDBConnection();
@@ -131,7 +120,6 @@ function hasApplied($userId, $jobId)
     return $stmt->fetch() ? true : false;
 }
 
-// Apply for a job
 function applyForJob($userId, $jobId, $coverLetter, $resume = null)
 {
     $pdo = getDBConnection();
@@ -148,7 +136,6 @@ function applyForJob($userId, $jobId, $coverLetter, $resume = null)
     }
 }
 
-// Get user's applications
 function getUserApplications($userId, $status = null)
 {
     $pdo = getDBConnection();
@@ -173,19 +160,16 @@ function getUserApplications($userId, $status = null)
     return $stmt->fetchAll();
 }
 
-// Create new application
 function createApplication($userId, $jobId, $data)
 {
     $pdo = getDBConnection();
 
-    // Check if user already applied for this job
     $stmt = $pdo->prepare("SELECT id FROM applications WHERE user_id = ? AND job_id = ?");
     $stmt->execute([$userId, $jobId]);
     if ($stmt->fetch()) {
         return ['success' => false, 'message' => 'You have already applied for this job'];
     }
 
-    // Insert application
     $stmt = $pdo->prepare("INSERT INTO applications (user_id, job_id, cover_letter, resume_path, status, created_at)
                           VALUES (?, ?, ?, ?, 'pending', CURRENT_TIMESTAMP)");
 
@@ -200,7 +184,6 @@ function createApplication($userId, $jobId, $data)
     }
 }
 
-// Get applications for employer's jobs
 function getJobApplications($userId)
 {
     $pdo = getDBConnection();
@@ -216,7 +199,6 @@ function getJobApplications($userId)
     return $stmt->fetchAll();
 }
 
-// Get employer's jobs
 function getEmployerJobs($userId)
 {
     $pdo = getDBConnection();
@@ -230,7 +212,6 @@ function getEmployerJobs($userId)
     return $stmt->fetchAll();
 }
 
-// Save/Unsave job
 function toggleSaveJob($userId, $jobId)
 {
     $pdo = getDBConnection();
@@ -249,7 +230,6 @@ function toggleSaveJob($userId, $jobId)
     }
 }
 
-// Get saved jobs
 function getSavedJobs($userId)
 {
     $pdo = getDBConnection();
@@ -263,7 +243,6 @@ function getSavedJobs($userId)
     return $stmt->fetchAll();
 }
 
-// Check if job is saved
 function isJobSaved($userId, $jobId)
 {
     $pdo = getDBConnection();
@@ -272,7 +251,6 @@ function isJobSaved($userId, $jobId)
     return $stmt->fetch() ? true : false;
 }
 
-// Get user profile
 function getUserProfile($userId)
 {
     $pdo = getDBConnection();
@@ -281,7 +259,6 @@ function getUserProfile($userId)
     return $stmt->fetch();
 }
 
-// Get company by user ID
 function getCompanyByUser($userId)
 {
     $pdo = getDBConnection();
@@ -290,7 +267,6 @@ function getCompanyByUser($userId)
     return $stmt->fetch();
 }
 
-// Get stats for homepage
 function getStats()
 {
     $pdo = getDBConnection();
@@ -312,13 +288,11 @@ function getStats()
     return $stats;
 }
 
-// Search jobs
 function searchJobs($keyword, $location = '')
 {
     return getJobs(['keyword' => $keyword, 'location' => $location], 20);
 }
 
-// Format salary
 function formatSalary($min, $max, $type = 'yearly')
 {
     if (!$min && !$max) return 'Negotiable';
@@ -337,7 +311,6 @@ function formatSalary($min, $max, $type = 'yearly')
     return $format($min ?: $max) . '/' . substr($type, 0, 2);
 }
 
-// Save job
 function saveJob($userId, $jobId)
 {
     $pdo = getDBConnection();
@@ -354,7 +327,6 @@ function saveJob($userId, $jobId)
     return ['success' => true, 'message' => 'Job saved successfully'];
 }
 
-// Unsave job
 function unsaveJob($userId, $jobId)
 {
     $pdo = getDBConnection();

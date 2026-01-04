@@ -1,12 +1,7 @@
 <?php
 
-/**
- * JobPortal - Interview Management Functions
- */
-
 require_once 'config.php';
 
-// Get interviews for a user (candidate or employer)
 function getInterviews($userId, $userType, $status = null)
 {
     $pdo = getDBConnection();
@@ -20,7 +15,6 @@ function getInterviews($userId, $userType, $status = null)
                 JOIN users u ON i.interviewer_id = u.id
                 WHERE i.candidate_id = ?";
     } else {
-        // Employer - show interviews for their jobs
         $sql = "SELECT i.*, j.title as job_title, j.location,
                        u.name as candidate_name, u.email as candidate_email
                 FROM interviews i
@@ -43,12 +37,10 @@ function getInterviews($userId, $userType, $status = null)
     return $stmt->fetchAll();
 }
 
-// Schedule a new interview
 function scheduleInterview($data)
 {
     $pdo = getDBConnection();
 
-    // Validate required fields
     $required = ['application_id', 'interviewer_id', 'candidate_id', 'job_id', 'interview_date'];
     foreach ($required as $field) {
         if (empty($data[$field])) {
@@ -56,7 +48,6 @@ function scheduleInterview($data)
         }
     }
 
-    // Check if interview already exists for this application
     $stmt = $pdo->prepare("SELECT id FROM interviews WHERE application_id = ?");
     $stmt->execute([$data['application_id']]);
     if ($stmt->fetch()) {
@@ -90,7 +81,6 @@ function scheduleInterview($data)
     }
 }
 
-// Update interview status/feedback
 function updateInterview($interviewId, $data)
 {
     $pdo = getDBConnection();
@@ -122,7 +112,6 @@ function updateInterview($interviewId, $data)
     }
 }
 
-// Get interview details
 function getInterview($interviewId, $userId, $userType)
 {
     $pdo = getDBConnection();
@@ -149,12 +138,10 @@ function getInterview($interviewId, $userId, $userType)
     return $stmt->fetch();
 }
 
-// Cancel interview
 function cancelInterview($interviewId, $userId, $userType)
 {
     $pdo = getDBConnection();
 
-    // Verify ownership
     $interview = getInterview($interviewId, $userId, $userType);
     if (!$interview) {
         return ['success' => false, 'message' => 'Interview not found or access denied.'];
@@ -163,7 +150,6 @@ function cancelInterview($interviewId, $userId, $userType)
     return updateInterview($interviewId, ['status' => 'cancelled']);
 }
 
-// Get upcoming interviews count
 function getUpcomingInterviewsCount($userId, $userType)
 {
     $pdo = getDBConnection();

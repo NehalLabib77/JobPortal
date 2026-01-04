@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <?php
 require_once 'php/includes/config.php';
-
-// No login requirement here - anyone can view job details
-// Login check will be done when applying
 ?>
 <html lang="en">
 
@@ -416,52 +413,44 @@ require_once 'php/includes/config.php';
     <script>
         function openApplyModal() {
             <?php if (!isset($_SESSION['user_id'])): ?>
-                // Not logged in - redirect to login with return URL
-                const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;
+                const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;;
                 const returnUrl = jobId ? 'job-single.php?id=' + jobId : 'job-single.php';
                 window.location.href = 'login.php?redirect=' + encodeURIComponent(returnUrl);
                 return;
             <?php elseif ($_SESSION['user_type'] !== 'candidate'): ?>
-                // Logged in but not as candidate - redirect to login
-                const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;
+                const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;;
                 const returnUrl2 = jobId ? 'job-single.php?id=' + jobId : 'job-single.php';
                 window.location.href = 'login.php?redirect=' + encodeURIComponent(returnUrl2);
                 return;
             <?php endif; ?>
 
-            // User is logged in as candidate - show application modal
             document.getElementById('applyModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeApplyModal() {
             document.getElementById('applyModal').classList.remove('active');
-            document.body.style.overflow = ''; // Restore scroll
+            document.body.style.overflow = '';
         }
 
         function submitApplication(event) {
             event.preventDefault();
 
-            // Get the button properly (not the icon inside it)
             const submitBtn = document.querySelector('#applyModal .modal-footer .btn-primary');
             const originalText = submitBtn.innerHTML;
 
-            // Show loading
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
 
-            // Get form data
             const formData = new FormData(document.getElementById('applyForm'));
             const jobId = <?php echo isset($_GET['id']) ? $_GET['id'] : 0; ?>;
 
-            // Prepare data for API
             const applicationData = {
                 job_id: jobId,
                 cover_letter: formData.get('cover_letter') || '',
-                resume_path: null // For now, we'll handle file uploads later
+                resume_path: null
             };
 
-            // Submit application
             fetch('php/api/applications-api.php?action=create', {
                     method: 'POST',
                     headers: {
@@ -474,7 +463,6 @@ require_once 'php/includes/config.php';
                     if (data.success) {
                         closeApplyModal();
 
-                        // Show success notification
                         const notification = document.createElement('div');
                         notification.style.cssText = `
                         position: fixed;
@@ -500,17 +488,13 @@ require_once 'php/includes/config.php';
                             setTimeout(() => notification.remove(), 300);
                         }, 4000);
 
-                        // Reset button
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalText;
 
-                        // Reset form
                         document.getElementById('applyForm').reset();
                     } else {
-                        // Show error
                         alert('Error: ' + data.message);
 
-                        // Reset button
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalText;
                     }
@@ -519,13 +503,11 @@ require_once 'php/includes/config.php';
                     console.error('Error:', error);
                     alert('An error occurred while submitting your application. Please try again.');
 
-                    // Reset button
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
                 });
         }
 
-        // Close modal when clicking on overlay
         document.getElementById('applyModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeApplyModal();

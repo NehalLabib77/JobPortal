@@ -1,20 +1,13 @@
 <?php
 
-/**
- * Register Handler
- * Processes registration form submissions
- */
-
 require_once '../includes/config.php';
 require_once '../auth/auth.php';
 
-// Check if already logged in
 if (isLoggedIn()) {
     $redirect = $_SESSION['user']['role'] === 'employer' ? 'dashboard-employer.php' : 'dashboard-candidate.php';
     redirect('../' . $redirect);
 }
 
-// Process registration form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = sanitize($_POST['name'] ?? '');
     $email = sanitize($_POST['email'] ?? '');
@@ -22,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password_confirm = $_POST['password_confirm'] ?? '';
     $role = sanitize($_POST['role'] ?? 'candidate');
 
-    // Validate inputs
     $errors = [];
 
     if (empty($name)) {
@@ -54,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('../register.html');
     }
 
-    // Attempt registration
     $result = registerUser([
         'name' => $name,
         'email' => $email,

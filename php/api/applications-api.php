@@ -1,16 +1,10 @@
 <?php
 
-/**
- * Applications API
- * Handles application management for candidates
- */
-
 require_once '../includes/config.php';
 require_once '../auth/auth.php';
 
 header('Content-Type: application/json');
 
-// Check if user is logged in
 if (!isLoggedIn()) {
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Authentication required']);
@@ -41,7 +35,6 @@ switch ($method) {
     case 'POST':
         switch ($action) {
             case 'create':
-                // Only candidates can apply
                 if ($userType !== 'candidate') {
                     http_response_code(403);
                     echo json_encode(['success' => false, 'message' => 'Only candidates can apply for jobs']);

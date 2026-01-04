@@ -1,13 +1,8 @@
 <?php
 
-/**
- * JobPortal - Job Management Functions
- */
-
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/functions.php';
 
-// Create new job
 function createJob($data)
 {
     if (!isLoggedIn() || !isEmployer()) {
@@ -16,7 +11,6 @@ function createJob($data)
 
     $pdo = getDBConnection();
 
-    // Get company
     $stmt = $pdo->prepare("SELECT id FROM companies WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $company = $stmt->fetch();
@@ -25,7 +19,6 @@ function createJob($data)
         return ['success' => false, 'message' => 'Please create a company profile first.'];
     }
 
-    // Validate required fields
     $required = ['title', 'description', 'job_type', 'location'];
     foreach ($required as $field) {
         if (empty($data[$field])) {
@@ -33,10 +26,8 @@ function createJob($data)
         }
     }
 
-    // Generate slug
     $slug = generateSlug($data['title']) . '-' . time();
 
-    // Set initial status (draft if payment required, active otherwise)
     $status = isset($data['status']) ? $data['status'] : 'draft';
 
     $sql = "INSERT INTO jobs (company_id, user_id, category_id, title, slug, description, requirements, 
@@ -73,7 +64,6 @@ function createJob($data)
     }
 }
 
-// Update job
 function updateJob($jobId, $data)
 {
     if (!isLoggedIn() || !isEmployer()) {
@@ -82,7 +72,6 @@ function updateJob($jobId, $data)
 
     $pdo = getDBConnection();
 
-    // Verify ownership
     $stmt = $pdo->prepare("SELECT id FROM jobs WHERE id = ? AND user_id = ?");
     $stmt->execute([$jobId, $_SESSION['user_id']]);
     if (!$stmt->fetch()) {
@@ -133,7 +122,6 @@ function updateJob($jobId, $data)
     }
 }
 
-// Delete job
 function deleteJob($jobId)
 {
     if (!isLoggedIn() || !isEmployer()) {
@@ -142,7 +130,6 @@ function deleteJob($jobId)
 
     $pdo = getDBConnection();
 
-    // Verify ownership
     $stmt = $pdo->prepare("SELECT id FROM jobs WHERE id = ? AND user_id = ?");
     $stmt->execute([$jobId, $_SESSION['user_id']]);
     if (!$stmt->fetch()) {
@@ -155,7 +142,6 @@ function deleteJob($jobId)
     return ['success' => true, 'message' => 'Job deleted successfully.'];
 }
 
-// Update application status
 function updateApplicationStatus($applicationId, $status)
 {
     if (!isLoggedIn() || !isEmployer()) {
@@ -169,7 +155,6 @@ function updateApplicationStatus($applicationId, $status)
 
     $pdo = getDBConnection();
 
-    // Verify the application belongs to employer's job
     $stmt = $pdo->prepare("SELECT a.id FROM applications a 
                            JOIN jobs j ON a.job_id = j.id 
                            WHERE a.id = ? AND j.user_id = ?");
@@ -185,7 +170,6 @@ function updateApplicationStatus($applicationId, $status)
     return ['success' => true, 'message' => 'Application status updated.'];
 }
 
-// Create/Update Company Profile
 function saveCompanyProfile($data)
 {
     if (!isLoggedIn() || !isEmployer()) {
@@ -195,13 +179,11 @@ function saveCompanyProfile($data)
     $pdo = getDBConnection();
     $userId = $_SESSION['user_id'];
 
-    // Check if company exists
     $stmt = $pdo->prepare("SELECT id FROM companies WHERE user_id = ?");
     $stmt->execute([$userId]);
     $existing = $stmt->fetch();
 
     if ($existing) {
-        // Update
         $sql = "UPDATE companies SET name = ?, description = ?, industry = ?, company_size = ?, 
                 founded_year = ?, website = ?, location = ?, email = ?, phone = ? WHERE user_id = ?";
         $params = [
@@ -217,7 +199,6 @@ function saveCompanyProfile($data)
             $userId
         ];
     } else {
-        // Insert
         $slug = generateSlug($data['name']) . '-' . $userId;
         $sql = "INSERT INTO companies (user_id, name, slug, description, industry, company_size, 
                 founded_year, website, location, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

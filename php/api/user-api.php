@@ -1,10 +1,5 @@
 <?php
 
-/**
- * User API
- * RESTful API for user operations
- */
-
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -30,9 +25,6 @@ switch ($method) {
         jsonResponse(['error' => 'Method not allowed'], 405);
 }
 
-/**
- * Handle GET requests
- */
 function handleGetRequest($action)
 {
     switch ($action) {
@@ -98,14 +90,10 @@ function handleGetRequest($action)
     }
 }
 
-/**
- * Handle POST requests
- */
 function handlePostRequest($action)
 {
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // For form data
     if (empty($data)) {
         $data = $_POST;
     }
@@ -155,9 +143,6 @@ function handlePostRequest($action)
     }
 }
 
-/**
- * Handle PUT requests (Update)
- */
 function handlePutRequest($action)
 {
     if (!isLoggedIn()) {
@@ -189,9 +174,6 @@ function handlePutRequest($action)
     }
 }
 
-/**
- * Send JSON response
- */
 function jsonResponse($data, $statusCode = 200)
 {
     http_response_code($statusCode);

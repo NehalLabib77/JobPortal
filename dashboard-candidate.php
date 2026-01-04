@@ -2,7 +2,6 @@
 <?php
 require_once 'php/includes/config.php';
 
-// Check if user is logged in and is a candidate
 if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'candidate') {
     header('Location: login.php');
     exit();
@@ -416,26 +415,21 @@ $userEmail = $_SESSION['user_email'] ?? '';
 
     <script>
         function showTab(tabName) {
-            // Hide all tabs
             document.querySelectorAll('[id$="-tab"]').forEach(tab => {
                 tab.classList.add('hidden');
             });
 
-            // Show selected tab
             document.getElementById(tabName + '-tab').classList.remove('hidden');
 
-            // Update sidebar active state
             document.querySelectorAll('.sidebar-nav a').forEach(link => {
                 link.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
 
-            // Load applications if applications tab is selected
             if (tabName === 'applications') {
                 loadApplications();
             }
 
-            // Load interviews if interviews tab is selected
             if (tabName === 'interviews') {
                 loadInterviews();
             }
@@ -476,7 +470,6 @@ $userEmail = $_SESSION['user_email'] ?? '';
             }
         }
 
-        // Auto-refresh interviews every 30 seconds
         setInterval(() => {
             if (document.getElementById('interviews-tab') && !document.getElementById('interviews-tab').classList.contains('hidden')) {
                 loadInterviews();
@@ -549,12 +542,9 @@ $userEmail = $_SESSION['user_email'] ?? '';
         }
 
         function checkInterviews(applicationId) {
-            // Switch to interviews tab and filter by this application
             showTab('interviews');
-            // Could add filtering logic here
         }
 
-        // Add event listener for status filter
         document.getElementById('statusFilter').addEventListener('change', function() {
             if (document.getElementById('applications-tab').classList.contains('hidden') === false) {
                 loadApplications();

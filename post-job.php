@@ -2,7 +2,6 @@
 <?php
 require_once 'php/includes/config.php';
 
-// Check if user is logged in as employer
 if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'employer') {
     header('Location: login.php?redirect=post-job.php');
     exit();
@@ -292,19 +291,15 @@ $userName = $_SESSION['user_name'] ?? 'User';
     </style>
 
     <script>
-        // Payment method selection
         document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                // Show payment details
                 document.getElementById('paymentDetails').style.display = 'block';
 
-                // Update selected styles
                 document.querySelectorAll('.payment-method-card').forEach(card => {
                     card.classList.remove('selected');
                 });
                 this.closest('.payment-method-card').classList.add('selected');
 
-                // Update instructions based on method
                 const method = this.value;
                 const numbers = {
                     'bkash': '01712345678',
@@ -345,14 +340,12 @@ $userName = $_SESSION['user_name'] ?? 'User';
         document.getElementById('postJobForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Validate payment method selected
             const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
             if (!paymentMethod) {
                 alert('Please select a payment method');
                 return;
             }
 
-            // Validate payment details
             const payerPhone = document.querySelector('input[name="payer_phone"]').value;
             const payerName = document.querySelector('input[name="payer_name"]').value;
 
@@ -361,7 +354,6 @@ $userName = $_SESSION['user_name'] ?? 'User';
                 return;
             }
 
-            // Show success message (Demo)
             const txnId = 'TXN' + Date.now();
             alert(`Payment submitted successfully!
 
